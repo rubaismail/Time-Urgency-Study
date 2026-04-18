@@ -6,26 +6,48 @@ namespace Station1
     {
         public bool gameStarted = false;
 
-        public MonoBehaviour movementScript; // assign your movement component
+        [Header("References")]
+        public MonoBehaviour movementScript;
         public HanoiManager hanoiManager;
+        public Disk[] allDisks;
+
+        private void Start()
+        {
+            DisableAllDiskGrabs();
+        }
 
         public void StartGame()
         {
+            if (gameStarted)
+                return;
+
             Debug.Log("START BUTTON PRESSED");
 
             gameStarted = true;
 
-            // Disable movement
             if (movementScript != null)
                 movementScript.enabled = false;
 
-            // Enable puzzle interaction
-            hanoiManager.enabled = true;
-            
-            hanoiManager.InitializePuzzle();
-            hanoiManager.RefreshAllGrabStates();
+            if (hanoiManager != null)
+            {
+                hanoiManager.enabled = true;
+                hanoiManager.InitializePuzzle();
+                hanoiManager.RefreshAllGrabStates();
+            }
 
             Debug.Log("Task 1 Started!");
+        }
+
+        private void DisableAllDiskGrabs()
+        {
+            if (allDisks == null)
+                return;
+
+            foreach (Disk disk in allDisks)
+            {
+                if (disk != null)
+                    disk.SetGrabbable(false);
+            }
         }
     }
 }
