@@ -1,9 +1,20 @@
 using UnityEngine;
+using TMPro;
 
 namespace Station1
 {
     public class GameManager : MonoBehaviour
     {
+        public enum TimePressureMode
+        {
+            VisualCountdown,
+            AudioCountdown,
+            NpcUrging
+        }
+
+        [Header("Session Condition")]
+        public TimePressureMode timePressureMode = TimePressureMode.VisualCountdown;
+
         [Header("Task State")]
         public bool taskRunning = false;
         public bool taskEnded = false;
@@ -12,9 +23,11 @@ namespace Station1
         [Header("Timer")]
         public float timeLimit = 60f;
         public float timeRemaining;
-
-        [Header("Results")]
         public float timeToCompletion = 0f;
+
+        [Header("UI")]
+        public GameObject timerUIRoot;
+        public TextMeshPro timerText;
 
         [Header("References")]
         public HanoiManager hanoiManager;
@@ -23,6 +36,7 @@ namespace Station1
         private void Start()
         {
             ResetTaskToIdleState();
+            UpdateTimerVisual();
         }
 
         private void Update()
@@ -32,7 +46,10 @@ namespace Station1
 
             timeRemaining -= Time.deltaTime;
 
-            Debug.Log("Time Remaining: " + timeRemaining.ToString("F2"));
+            if (timeRemaining < 0f)
+                timeRemaining = 0f;
+
+            UpdateTimerVisual();
 
             if (hanoiManager != null && hanoiManager.CheckWin())
             {
@@ -63,6 +80,8 @@ namespace Station1
                 hanoiManager.RefreshAllGrabStates();
             }
 
+            UpdateTimerVisual();
+
             Debug.Log("Task 1 Started!");
         }
 
@@ -78,6 +97,7 @@ namespace Station1
             timeToCompletion = timeLimit - timeRemaining;
 
             DisableAllDiskGrabs();
+            UpdateTimerVisual();
 
             Debug.Log("TASK SUCCEEDED");
             Debug.Log("Success: true");
@@ -100,6 +120,7 @@ namespace Station1
             timeToCompletion = timeLimit;
 
             DisableAllDiskGrabs();
+            UpdateTimerVisual();
 
             Debug.Log("TASK FAILED: TIME RAN OUT");
             Debug.Log("Success: false");
@@ -123,6 +144,8 @@ namespace Station1
             {
                 hanoiManager.ClearAllPegs();
             }
+
+            UpdateTimerVisual();
         }
 
         private void ResetTaskToIdleState()
@@ -139,6 +162,8 @@ namespace Station1
             {
                 hanoiManager.ClearAllPegs();
             }
+
+            UpdateTimerVisual();
         }
 
         private void DisableAllDiskGrabs()
@@ -150,6 +175,38 @@ namespace Station1
             {
                 if (disk != null)
                     disk.SetGrabbable(false);
+            }
+        }
+
+        private void UpdateTimerVisual()
+        {
+            if (timerUIRoot != null)
+            {
+                bool showVisualTimer = (timePressureMode == TimePressureMode.VisualCountdown);
+                timerUIRoot.SetActive(showVisualTimer);
+            }
+
+            if (timerText == null)
+                return;
+
+            if (timePressureMode != TimePressureMode.VisualCountdown)
+                return;
+
+            if (!taskRunning && !taskEnded)
+            {
+                timerText.text = "Press Button To Start";
+            }
+            else if (taskRunning)
+            {
+                timerText.text = "Time: " + Mathf.CeilToInt(timeRemaining).ToString();
+            }
+            else if (taskEnded && taskSucceeded)
+            {
+                timerText.text = "Success!";
+            }
+            else if (taskEnded && !taskSucceeded)
+            {
+                timerText.text = "Time Is Up!";
             }
         }
     }
