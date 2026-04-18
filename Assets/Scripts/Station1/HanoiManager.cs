@@ -12,30 +12,41 @@ namespace Station1
         [Header("Starting Disks (largest to smallest)")]
         public Disk[] startingDisks;
 
-        private void Start()
-        {
-            InitializePuzzle();
-            RefreshAllGrabStates();
-        }
+        public int moveCount = 0;
+        public int illegalMoveCount = 0;
+        public int invalidDropCount = 0;
 
         public void InitializePuzzle()
         {
-            // Clear any old peg references
+            ClearAllPegs();
+
+            for (int i = 0; i < startingDisks.Length; i++)
+            {
+                peg1.SnapDiskToPeg(startingDisks[i]);
+            }
+
+            moveCount = 0;
+            illegalMoveCount = 0;
+            invalidDropCount = 0;
+        }
+
+        public void ClearAllPegs()
+        {
             foreach (Disk disk in startingDisks)
             {
                 if (disk.currentPeg != null)
                 {
                     disk.currentPeg.RemoveDisk(disk);
+                    disk.currentPeg = null;
                 }
             }
-
-            // Put all starting disks on Peg1
-            for (int i = 0; i < startingDisks.Length; i++)
-            {
-                peg1.SnapDiskToPeg(startingDisks[i]);
-            }
         }
-        
+
+        public bool CheckWin()
+        {
+            return peg3.DiskCount == startingDisks.Length;
+        }
+
         public void RefreshAllGrabStates()
         {
             peg1.UpdateGrabState();

@@ -8,40 +8,32 @@ namespace Station1
     {
         [Header("Disk Info")]
         public int sizeRank;
-        
+
         [Header("Highlight")]
         public Color highlightColor = Color.yellow;
-
-        private Renderer diskRenderer;
-        private Color originalColor;
 
         [HideInInspector] public Peg currentPeg;
 
         private Vector3 previousPosition;
         private Quaternion previousRotation;
         private Peg previousPeg;
-
         private Peg hoveredPeg;
 
         private XRGrabInteractable grabInteractable;
         private Rigidbody rb;
+        private Renderer diskRenderer;
+        private Color originalColor;
 
         private void Awake()
         {
             grabInteractable = GetComponent<XRGrabInteractable>();
             rb = GetComponent<Rigidbody>();
-            
-            diskRenderer = GetComponentInChildren<Renderer>();
 
+            diskRenderer = GetComponentInChildren<Renderer>();
             if (diskRenderer != null && diskRenderer.material.HasProperty("_Color"))
             {
                 originalColor = diskRenderer.material.color;
             }
-        }
-        
-        private void Start()
-        {
-            SetGrabbable(false);
         }
 
         private void OnEnable()
@@ -75,32 +67,46 @@ namespace Station1
 
         private void OnRelease(SelectExitEventArgs args)
         {
+            GameManager gameManager = FindFirstObjectByType<GameManager>();
+
+            if (gameManager == null || !gameManager.taskRunning)
+            {
+                ReturnToPreviousSpot();
+                return;
+            }
+
             if (previousPeg == null)
             {
+                CountIllegalMove();
                 ReturnToPreviousSpot();
                 return;
             }
 
             if (!previousPeg.IsTopDisk(this))
             {
+                CountIllegalMove();
                 ReturnToPreviousSpot();
                 return;
             }
 
             if (hoveredPeg == null)
             {
+                CountInvalidDrop();
                 ReturnToPreviousSpot();
                 return;
             }
 
             if (!hoveredPeg.CanPlaceDisk(this))
             {
+                CountIllegalMove();
                 ReturnToPreviousSpot();
                 return;
             }
 
             previousPeg.RemoveDisk(this);
             hoveredPeg.SnapDiskToPeg(this);
+
+            CountLegalMove();
             RefreshGrabStates();
         }
 
@@ -114,7 +120,7 @@ namespace Station1
                 rb.linearVelocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
             }
-            
+
             if (previousPeg != null)
             {
                 currentPeg = previousPeg;
@@ -140,7 +146,7 @@ namespace Station1
                 hoveredPeg = null;
             }
         }
-        
+
         public void SetGrabbable(bool canGrab)
         {
             if (grabInteractable != null)
@@ -148,7 +154,46 @@ namespace Station1
                 grabInteractable.enabled = canGrab;
             }
         }
+
+        private void RefreshGrabStates()
+        {
+            HanoiManager manager = FindFirstObjectByType<HanoiManager>();
+            if (manager != null)
+            {
+                manager.RefreshAllGrabStates();
+            }
+        }
+
+        private void CountLegalMove()
+        {
+            HanoiManager manager = FindFirstObjectByType<HanoiManager>();
+            if (manager != null)
+            {
+                manager.moveCount++;
+                Debug.Log("Moves: " + manager.moveCount);
+            }
+        }
+
+        private void CountIllegalMove()
+        {
+            HanoiManager manager = FindFirstObjectByType<HanoiManager>();
+            if (manager != null)
+            {
+                manager.illegalMoveCount++;
+                Debug.Log("Illegal Moves: " + manager.illegalMoveCount);
+            }
+        }
         
+        private void CountInvalidDrop()
+        {
+            HanoiManager manager = FindFirstObjectByType<HanoiManager>();
+            if (manager != null)
+            {
+                manager.invalidDropCount++;
+                Debug.Log("Invalid Drops: " + manager.invalidDropCount);
+            }
+        }
+
         private void OnHoverEnter(HoverEnterEventArgs args)
         {
             SetHighlight(true);
@@ -164,15 +209,6 @@ namespace Station1
             if (diskRenderer != null && diskRenderer.material.HasProperty("_Color"))
             {
                 diskRenderer.material.color = isHighlighted ? highlightColor : originalColor;
-            }
-        }
-        
-        private void RefreshGrabStates()
-        {
-            HanoiManager manager = FindFirstObjectByType<HanoiManager>();
-            if (manager != null)
-            {
-                manager.RefreshAllGrabStates();
             }
         }
     }
