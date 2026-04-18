@@ -32,11 +32,13 @@ namespace Station1
         [Header("References")]
         public HanoiManager hanoiManager;
         public Disk[] allDisks;
+        public GameObject startButtonObject;
 
         private void Start()
         {
             ResetTaskToIdleState();
             UpdateTimerVisual();
+            UpdateStartButtonVisual();
         }
 
         private void Update()
@@ -81,6 +83,7 @@ namespace Station1
             }
 
             UpdateTimerVisual();
+            UpdateStartButtonVisual();
 
             Debug.Log("Task 1 Started!");
         }
@@ -98,6 +101,7 @@ namespace Station1
 
             DisableAllDiskGrabs();
             UpdateTimerVisual();
+            UpdateStartButtonVisual();
 
             Debug.Log("TASK SUCCEEDED");
             Debug.Log("Success: true");
@@ -121,6 +125,7 @@ namespace Station1
 
             DisableAllDiskGrabs();
             UpdateTimerVisual();
+            UpdateStartButtonVisual();
 
             Debug.Log("TASK FAILED: TIME RAN OUT");
             Debug.Log("Success: false");
@@ -146,6 +151,7 @@ namespace Station1
             }
 
             UpdateTimerVisual();
+            UpdateStartButtonVisual();
         }
 
         private void ResetTaskToIdleState()
@@ -164,6 +170,7 @@ namespace Station1
             }
 
             UpdateTimerVisual();
+            UpdateStartButtonVisual();
         }
 
         private void DisableAllDiskGrabs()
@@ -176,6 +183,16 @@ namespace Station1
                 if (disk != null)
                     disk.SetGrabbable(false);
             }
+        }
+        
+        private void UpdateStartButtonVisual()
+        {
+            if (startButtonObject == null)
+                return;
+
+            // Show button only when task is idle
+            bool showButton = !taskRunning;
+            startButtonObject.SetActive(showButton);
         }
 
         private void UpdateTimerVisual()
