@@ -1035,6 +1035,7 @@ MonoBehaviour:
   - {fileID: 675968788}
   - {fileID: 78723265}
   - {fileID: 191438170}
+  startButtonObject: {fileID: 621479018}
 --- !u!4 &675968782 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3838359647187692770, guid: 72fde759b44214b68b308ec3eb8a9799, type: 3}

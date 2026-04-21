@@ -33,6 +33,9 @@ namespace Station1
         public HanoiManager hanoiManager;
         public Disk[] allDisks;
         public GameObject startButtonObject;
+        
+        [Header("Latest Result")]
+        public TaskResult lastResult;
 
         private void Start()
         {
@@ -100,15 +103,12 @@ namespace Station1
             timeToCompletion = timeLimit - timeRemaining;
 
             DisableAllDiskGrabs();
+            BuildTaskResult(true);
+            PrintTaskResult();
             UpdateTimerVisual();
             UpdateStartButtonVisual();
 
             Debug.Log("TASK SUCCEEDED");
-            Debug.Log("Success: true");
-            Debug.Log("Moves: " + hanoiManager.moveCount);
-            Debug.Log("Illegal Moves: " + hanoiManager.illegalMoveCount);
-            Debug.Log("Invalid Drops: " + hanoiManager.invalidDropCount);
-            Debug.Log("Time To Completion: " + timeToCompletion.ToString("F2"));
         }
 
         public void EndTaskFailure()
@@ -124,15 +124,12 @@ namespace Station1
             timeToCompletion = timeLimit;
 
             DisableAllDiskGrabs();
+            BuildTaskResult(false);
+            PrintTaskResult();
             UpdateTimerVisual();
             UpdateStartButtonVisual();
 
             Debug.Log("TASK FAILED: TIME RAN OUT");
-            Debug.Log("Success: false");
-            Debug.Log("Moves: " + hanoiManager.moveCount);
-            Debug.Log("Illegal Moves: " + hanoiManager.illegalMoveCount);
-            Debug.Log("Invalid Drops: " + hanoiManager.invalidDropCount);
-            Debug.Log("Time To Completion: " + timeToCompletion.ToString("F2"));
         }
 
         private void ResetTaskForNewRun()
@@ -171,6 +168,41 @@ namespace Station1
 
             UpdateTimerVisual();
             UpdateStartButtonVisual();
+        }
+        
+        private void BuildTaskResult(bool successValue)
+        {
+            if (hanoiManager == null)
+                return;
+
+            lastResult = new TaskResult
+            {
+                taskName = "TowersOfHanoi",
+                timePressureMode = timePressureMode.ToString(),
+                success = successValue,
+                moveCount = hanoiManager.moveCount,
+                illegalMoveCount = hanoiManager.illegalMoveCount,
+                invalidDropCount = hanoiManager.invalidDropCount,
+                timeToCompletion = timeToCompletion,
+                timeLimit = timeLimit
+            };
+        }
+        
+        private void PrintTaskResult()
+        {
+            if (lastResult == null)
+                return;
+
+            Debug.Log("----- TASK RESULT -----");
+            Debug.Log("Task Name: " + lastResult.taskName);
+            Debug.Log("Time Pressure Mode: " + lastResult.timePressureMode);
+            Debug.Log("Success: " + lastResult.success);
+            Debug.Log("Moves: " + lastResult.moveCount);
+            Debug.Log("Illegal Moves: " + lastResult.illegalMoveCount);
+            Debug.Log("Invalid Drops: " + lastResult.invalidDropCount);
+            Debug.Log("Time To Completion: " + lastResult.timeToCompletion.ToString("F2"));
+            Debug.Log("Time Limit: " + lastResult.timeLimit.ToString("F2"));
+            Debug.Log("-----------------------");
         }
 
         private void DisableAllDiskGrabs()
