@@ -1,3 +1,4 @@
+using System.Globalization;
 using UnityEngine;
 using TMPro;
 
@@ -33,6 +34,7 @@ namespace Station1
         public HanoiManager hanoiManager;
         public Disk[] allDisks;
         public GameObject startButtonObject;
+        public DataLogger dataLogger;
         
         [Header("Latest Result")]
         public TaskResult lastResult;
@@ -105,6 +107,10 @@ namespace Station1
             DisableAllDiskGrabs();
             BuildTaskResult(true);
             PrintTaskResult();
+            
+            if (dataLogger != null)
+                dataLogger.LogTaskResult(lastResult);
+            
             UpdateTimerVisual();
             UpdateStartButtonVisual();
 
@@ -126,6 +132,10 @@ namespace Station1
             DisableAllDiskGrabs();
             BuildTaskResult(false);
             PrintTaskResult();
+            
+            if (dataLogger != null)
+                dataLogger.LogTaskResult(lastResult);
+            
             UpdateTimerVisual();
             UpdateStartButtonVisual();
 
