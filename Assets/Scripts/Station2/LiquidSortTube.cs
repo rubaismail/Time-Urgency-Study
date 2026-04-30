@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,8 +29,29 @@ namespace Station2
         [Header("Starting Liquid - Bottom to Top")]
         public LiquidColor[] startingColors;
 
+        [Header("Visual Feedback")]
+        public Renderer[] highlightRenderers;
+        public Color normalHighlightColor = Color.white;
+        public Color hoverHighlightColor = Color.yellow;
+        public Color selectedHighlightColor = Color.cyan;
+
+        [Header("Selection / Pour Animation")]
+        public float selectedLiftHeight = 0.18f;
+        public float pourHoverHeight = 0.25f;
+        public float animationSpeed = 6f;
+        public float pourTiltAngle = -55f;
+
+        private Vector3 originalLocalPosition;
+        private Quaternion originalLocalRotation;
+
         private readonly List<LiquidColor> liquidSections = new List<LiquidColor>();
         private readonly List<GameObject> spawnedVisuals = new List<GameObject>();
+
+        private void Awake()
+        {
+            originalLocalPosition = transform.localPosition;
+            originalLocalRotation = transform.localRotation;
+        }
 
         private void Start()
         {
@@ -140,7 +162,6 @@ namespace Station2
 
             int sameColorCount = CountTopSameColorGroup();
             int freeSpace = destinationTube.GetFreeSpace();
-
             int amountToPour = Mathf.Min(sameColorCount, freeSpace);
 
             for (int i = 0; i < amountToPour; i++)
@@ -192,7 +213,12 @@ namespace Station2
                     return;
                 }
 
-                GameObject newSection = Instantiate(liquidSectionPrefab, slots[i].position, Quaternion.identity, slots[i]);
+                GameObject newSection = Instantiate(liquidSectionPrefab, slots[i]);
+
+                newSection.transform.localPosition = Vector3.zero;
+                newSection.transform.localRotation = Quaternion.Euler(90f, 0f, 0f);
+                newSection.transform.localScale = liquidSectionPrefab.transform.localScale;
+
                 newSection.name = "Liquid_" + liquidSections[i];
 
                 Renderer sectionRenderer = newSection.GetComponent<Renderer>();
@@ -238,6 +264,128 @@ namespace Station2
                 default:
                     return Color.clear;
             }
+        }
+
+        public void SetHoverHighlight(bool isHovering)
+        {
+            if (highlightRenderers == null)
+            {
+                return;
+            }
+
+            Color targetColor = isHovering ? hoverHighlightColor : normalHighlightColor;
+
+            foreach (Renderer rend in highlightRenderers)
+            {
+                if (rend != null)
+                {
+                    rend.material.color = targetColor;
+                }
+            }
+        }
+
+        public void SetSelectedHighlight(bool isSelected)
+        {
+            if (highlightRenderers == null)
+            {
+                return;
+            }
+
+            Color targetColor = isSelected ? selectedHighlightColor : normalHighlightColor;
+
+            foreach (Renderer rend in highlightRenderers)
+            {
+                if (rend != null)
+                {
+                    rend.material.color = targetColor;
+                }
+            }
+        }
+
+        public void LiftAsSelected()
+        {
+            StopAllCoroutines();
+            StartCoroutine(MoveToLocalPosition(originalLocalPosition + Vector3.up * selectedLiftHeight));
+        }
+
+        public void ReturnToOriginalPose()
+        {
+            StopAllCoroutines();
+            StartCoroutine(ReturnToOriginalPoseRoutine());
+        }
+
+        public IEnumerator PlayPourAnimationToward(LiquidSortTube destinationTube, System.Action onPourMoment)
+        {
+            if (destinationTube == null)
+            {
+                yield break;
+            }
+
+            StopAllCoroutines();
+
+            Vector3 startPosition = transform.position;
+            Quaternion startRotation = transform.rotation;
+
+            Vector3 targetPosition = destinationTube.transform.position + Vector3.up * pourHoverHeight;
+            Quaternion targetRotation = Quaternion.Euler(0f, transform.eulerAngles.y, pourTiltAngle);
+
+            float t = 0f;
+
+            while (t < 1f)
+            {
+                t += Time.deltaTime * animationSpeed;
+
+                transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+                transform.rotation = Quaternion.Slerp(startRotation, targetRotation, t);
+
+                yield return null;
+            }
+
+            onPourMoment?.Invoke();
+
+            yield return new WaitForSeconds(0.25f);
+
+            yield return ReturnToOriginalPoseRoutine();
+
+            // Final safety refresh after tube is upright again.
+            RefreshVisuals();
+        }
+
+        private IEnumerator MoveToLocalPosition(Vector3 targetLocalPosition)
+        {
+            Vector3 startPosition = transform.localPosition;
+
+            float t = 0f;
+
+            while (t < 1f)
+            {
+                t += Time.deltaTime * animationSpeed;
+                transform.localPosition = Vector3.Lerp(startPosition, targetLocalPosition, t);
+                yield return null;
+            }
+
+            transform.localPosition = targetLocalPosition;
+        }
+
+        private IEnumerator ReturnToOriginalPoseRoutine()
+        {
+            Vector3 startPosition = transform.localPosition;
+            Quaternion startRotation = transform.localRotation;
+
+            float t = 0f;
+
+            while (t < 1f)
+            {
+                t += Time.deltaTime * animationSpeed;
+
+                transform.localPosition = Vector3.Lerp(startPosition, originalLocalPosition, t);
+                transform.localRotation = Quaternion.Slerp(startRotation, originalLocalRotation, t);
+
+                yield return null;
+            }
+
+            transform.localPosition = originalLocalPosition;
+            transform.localRotation = originalLocalRotation;
         }
     }
 }

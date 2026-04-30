@@ -22,33 +22,44 @@ namespace Station2
             if (selectedTube == null)
             {
                 selectedTube = tube;
+                selectedTube.SetSelectedHighlight(true);
+                selectedTube.LiftAsSelected();
+
                 Debug.Log("Selected source tube: " + tube.name);
                 return;
             }
 
             if (selectedTube == tube)
             {
-                Debug.Log("Deselected tube: " + tube.name);
+                selectedTube.SetSelectedHighlight(false);
+                selectedTube.ReturnToOriginalPose();
                 selectedTube = null;
+
+                Debug.Log("Deselected tube: " + tube.name);
                 return;
             }
 
             TryPour(selectedTube, tube);
-            selectedTube = null;
         }
 
         private void TryPour(LiquidSortTube sourceTube, LiquidSortTube destinationTube)
         {
             if (sourceTube.CanPourInto(destinationTube))
             {
-                int amountPoured = sourceTube.PourInto(destinationTube);
-                pourCount++;
+                StartCoroutine(sourceTube.PlayPourAnimationToward(destinationTube, () =>
+                {
+                    int amountPoured = sourceTube.PourInto(destinationTube);
+                    pourCount++;
 
-                Debug.Log("Legal pour: " + sourceTube.name + " → " + destinationTube.name +
-                          " | Sections poured: " + amountPoured +
-                          " | Total pours: " + pourCount);
+                    Debug.Log("Legal pour: " + sourceTube.name + " → " + destinationTube.name +
+                              " | Sections poured: " + amountPoured +
+                              " | Total pours: " + pourCount);
 
-                CheckWin();
+                    sourceTube.SetSelectedHighlight(false);
+                    selectedTube = null;
+
+                    CheckWin();
+                }));
             }
             else
             {
@@ -56,6 +67,10 @@ namespace Station2
 
                 Debug.Log("Illegal pour: " + sourceTube.name + " → " + destinationTube.name +
                           " | Illegal count: " + illegalPourCount);
+
+                sourceTube.SetSelectedHighlight(false);
+                sourceTube.ReturnToOriginalPose();
+                selectedTube = null;
             }
         }
 
