@@ -44,7 +44,7 @@ namespace Station1
 
         public bool CheckWin()
         {
-            return peg3.DiskCount == startingDisks.Length;
+            return peg3.diskCount == startingDisks.Length;
         }
 
         public void RefreshAllGrabStates()

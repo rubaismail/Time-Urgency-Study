@@ -1225,7 +1225,7 @@ MonoBehaviour:
   taskRunning: 0
   taskEnded: 0
   taskSucceeded: 0
-  timeLimit: 120
+  timeLimit: 200
   timeRemaining: 0
   timeToCompletion: 0
   timerUIRoot: {fileID: 2015869349}

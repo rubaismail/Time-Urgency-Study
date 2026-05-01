@@ -13,7 +13,7 @@ namespace Station1
 
         private List<Disk> disksOnPeg = new List<Disk>();
 
-        public int DiskCount
+        public int diskCount
         {
             get { return disksOnPeg.Count; }
         }
@@ -70,12 +70,7 @@ namespace Station1
             disk.transform.position = targetPosition;
             disk.transform.rotation = Quaternion.identity;
 
-            Rigidbody rb = disk.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.linearVelocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
-            }
+            disk.SetPhysicsLocked(true);
 
             AddDisk(disk);
         }

@@ -60,6 +60,7 @@ namespace Station1
 
         private void OnGrab(SelectEnterEventArgs args)
         {
+            SetPhysicsLocked(false);
             previousPosition = transform.position;
             previousRotation = transform.rotation;
             previousPeg = currentPeg;
@@ -162,6 +163,16 @@ namespace Station1
             {
                 manager.RefreshAllGrabStates();
             }
+        }
+        
+        public void SetPhysicsLocked(bool locked)
+        {
+            if (rb == null)
+                return;
+
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.isKinematic = locked;
         }
 
         private void CountLegalMove()
