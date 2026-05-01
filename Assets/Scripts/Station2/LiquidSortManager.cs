@@ -1,23 +1,208 @@
 using UnityEngine;
+using TMPro;
 
 namespace Station2
 {
     public class LiquidSortManager : MonoBehaviour
     {
-        [Header("All Tubes")]
+        public enum TimePressureMode
+        {
+            VisualCountdown,
+            AudioCountdown,
+            NpcUrging
+        }
+
+        [Header("Session Condition")]
+        public TimePressureMode timePressureMode = TimePressureMode.VisualCountdown;
+
+        [Header("Task State")]
+        public bool taskRunning = false;
+        public bool taskEnded = false;
+        public bool taskSucceeded = false;
+
+        [Header("Timer")]
+        public float timeLimit = 120f;
+        public float timeRemaining;
+        public float timeToCompletion = 0f;
+
+        [Header("UI")]
+        public GameObject timerUIRoot;
+        public TextMeshPro timerText;
+
+        [Header("References")]
         public LiquidSortTube[] tubes;
+        public LiquidSortTubeSelector[] tubeSelectors;
+        public GameObject startButtonObject;
+
+        [Header("Counts")]
+        public int pourCount = 0;
+        public int illegalPourCount = 0;
 
         private LiquidSortTube selectedTube;
 
-        private int pourCount;
-        private int illegalPourCount;
+        private void Start()
+        {
+            ResetTaskToIdleState();
+            UpdateTimerVisual();
+            UpdateStartButtonVisual();
+        }
+
+        private void Update()
+        {
+            if (!taskRunning)
+                return;
+
+            timeRemaining -= Time.deltaTime;
+
+            if (timeRemaining < 0f)
+                timeRemaining = 0f;
+
+            UpdateTimerVisual();
+
+            if (CheckWin())
+            {
+                EndTaskSuccess();
+                return;
+            }
+
+            if (timeRemaining <= 0f)
+            {
+                EndTaskFailure();
+            }
+        }
+
+        public void StartGame()
+        {
+            Debug.Log("Liquid Sort START BUTTON PRESSED");
+
+            ResetTaskForNewRun();
+
+            taskRunning = true;
+            taskEnded = false;
+            taskSucceeded = false;
+            timeToCompletion = 0f;
+
+            EnableTubeInteraction(true);
+
+            UpdateTimerVisual();
+            UpdateStartButtonVisual();
+
+            Debug.Log("Liquid Sort Started!");
+        }
+
+        public void EndTaskSuccess()
+        {
+            if (taskEnded)
+                return;
+
+            taskRunning = false;
+            taskEnded = true;
+            taskSucceeded = true;
+
+            timeToCompletion = timeLimit - timeRemaining;
+
+            EnableTubeInteraction(false);
+            ClearSelectedTube();
+
+            UpdateTimerVisual();
+            UpdateStartButtonVisual();
+
+            Debug.Log("LIQUID SORT SUCCEEDED");
+            Debug.Log("Pours: " + pourCount);
+            Debug.Log("Illegal Pours: " + illegalPourCount);
+            Debug.Log("Time To Completion: " + timeToCompletion.ToString("F2"));
+        }
+
+        public void EndTaskFailure()
+        {
+            if (taskEnded)
+                return;
+
+            taskRunning = false;
+            taskEnded = true;
+            taskSucceeded = false;
+
+            timeRemaining = 0f;
+            timeToCompletion = timeLimit;
+
+            EnableTubeInteraction(false);
+            ClearSelectedTube();
+
+            UpdateTimerVisual();
+            UpdateStartButtonVisual();
+
+            Debug.Log("LIQUID SORT FAILED: TIME RAN OUT");
+            Debug.Log("Pours: " + pourCount);
+            Debug.Log("Illegal Pours: " + illegalPourCount);
+        }
+
+        private void ResetTaskForNewRun()
+        {
+            taskRunning = false;
+            taskEnded = false;
+            taskSucceeded = false;
+
+            timeRemaining = timeLimit;
+            timeToCompletion = 0f;
+
+            pourCount = 0;
+            illegalPourCount = 0;
+            selectedTube = null;
+
+            InitializeAllTubes();
+            EnableTubeInteraction(false);
+
+            UpdateTimerVisual();
+            UpdateStartButtonVisual();
+        }
+
+        private void ResetTaskToIdleState()
+        {
+            taskRunning = false;
+            taskEnded = false;
+            taskSucceeded = false;
+
+            timeRemaining = timeLimit;
+            timeToCompletion = 0f;
+
+            pourCount = 0;
+            illegalPourCount = 0;
+            selectedTube = null;
+
+            InitializeAllTubes();
+            EnableTubeInteraction(false);
+
+            UpdateTimerVisual();
+            UpdateStartButtonVisual();
+        }
+
+        private void InitializeAllTubes()
+        {
+            if (tubes == null)
+                return;
+
+            foreach (LiquidSortTube tube in tubes)
+            {
+                if (tube != null)
+                {
+                    tube.InitializeTube();
+                    tube.ReturnToOriginalPose();
+                    tube.SetSelectedHighlight(false);
+                    tube.SetHoverHighlight(false);
+                }
+            }
+        }
 
         public void SelectTube(LiquidSortTube tube)
         {
-            if (tube == null)
+            if (!taskRunning)
             {
+                Debug.Log("Liquid Sort has not started yet.");
                 return;
             }
+
+            if (tube == null)
+                return;
 
             if (selectedTube == null)
             {
@@ -57,8 +242,6 @@ namespace Station2
 
                     sourceTube.SetSelectedHighlight(false);
                     selectedTube = null;
-
-                    CheckWin();
                 }));
             }
             else
@@ -74,34 +257,85 @@ namespace Station2
             }
         }
 
-        private void CheckWin()
+        private bool CheckWin()
         {
+            if (tubes == null || tubes.Length == 0)
+                return false;
+
             foreach (LiquidSortTube tube in tubes)
             {
-                if (!tube.IsSolved())
+                if (tube != null && !tube.IsSolved())
                 {
-                    return;
+                    return false;
                 }
             }
 
-            Debug.Log("Liquid Sort solved!");
+            return true;
         }
 
-        public int GetPourCount()
+        private void EnableTubeInteraction(bool canInteract)
         {
-            return pourCount;
+            if (tubeSelectors == null)
+                return;
+
+            foreach (LiquidSortTubeSelector selector in tubeSelectors)
+            {
+                if (selector != null)
+                {
+                    selector.SetInteractionEnabled(canInteract);
+                }
+            }
         }
 
-        public int GetIllegalPourCount()
+        private void ClearSelectedTube()
         {
-            return illegalPourCount;
+            if (selectedTube != null)
+            {
+                selectedTube.SetSelectedHighlight(false);
+                selectedTube.ReturnToOriginalPose();
+                selectedTube = null;
+            }
         }
 
-        public void ResetCounts()
+        private void UpdateStartButtonVisual()
         {
-            pourCount = 0;
-            illegalPourCount = 0;
-            selectedTube = null;
+            if (startButtonObject == null)
+                return;
+
+            bool showButton = !taskRunning;
+            startButtonObject.SetActive(showButton);
+        }
+
+        private void UpdateTimerVisual()
+        {
+            if (timerUIRoot != null)
+            {
+                bool showVisualTimer = (timePressureMode == TimePressureMode.VisualCountdown);
+                timerUIRoot.SetActive(showVisualTimer);
+            }
+
+            if (timerText == null)
+                return;
+
+            if (timePressureMode != TimePressureMode.VisualCountdown)
+                return;
+
+            if (!taskRunning && !taskEnded)
+            {
+                timerText.text = "Press Button To Start";
+            }
+            else if (taskRunning)
+            {
+                timerText.text = "Time: " + Mathf.CeilToInt(timeRemaining).ToString();
+            }
+            else if (taskEnded && taskSucceeded)
+            {
+                timerText.text = "Success!";
+            }
+            else if (taskEnded && !taskSucceeded)
+            {
+                timerText.text = "Time Is Up!";
+            }
         }
     }
 }

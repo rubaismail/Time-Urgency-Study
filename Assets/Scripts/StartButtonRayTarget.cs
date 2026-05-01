@@ -1,11 +1,14 @@
-using Station1;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class StartButtonRayTarget : MonoBehaviour
 {
-    public GameManager gameManager;
+    [Header("Task 1 (Hanoi)")]
+    public Station1.GameManager hanoiGameManager;
+
+    [Header("Task 2 (Liquid Sort)")]
+    public Station2.LiquidSortManager liquidSortManager;
 
     private XRSimpleInteractable interactable;
 
@@ -47,9 +50,14 @@ public class StartButtonRayTarget : MonoBehaviour
     {
         Debug.Log("Start Button Selected");
 
-        if (gameManager != null)
+        if (hanoiGameManager != null)
         {
-            gameManager.StartGame();
+            hanoiGameManager.StartGame();
+        }
+
+        if (liquidSortManager != null)
+        {
+            liquidSortManager.StartGame();
         }
     }
 }

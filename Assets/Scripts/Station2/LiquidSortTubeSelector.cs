@@ -1,59 +1,76 @@
-using Station2;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
-[RequireComponent(typeof(XRSimpleInteractable))]
-public class LiquidSortTubeSelector : MonoBehaviour
+namespace Station2
 {
-    public LiquidSortManager manager;
-    public LiquidSortTube tube;
-
-    private XRSimpleInteractable simpleInteractable;
-
-    private void Awake()
+    [RequireComponent(typeof(XRSimpleInteractable))]
+    public class LiquidSortTubeSelector : MonoBehaviour
     {
-        simpleInteractable = GetComponent<XRSimpleInteractable>();
-    }
+        public LiquidSortManager manager;
+        public LiquidSortTube tube;
 
-    private void OnEnable()
-    {
-        simpleInteractable.hoverEntered.AddListener(OnHoverEntered);
-        simpleInteractable.hoverExited.AddListener(OnHoverExited);
-        simpleInteractable.selectEntered.AddListener(OnSelected);
-    }
+        private XRSimpleInteractable simpleInteractable;
 
-    private void OnDisable()
-    {
-        simpleInteractable.hoverEntered.RemoveListener(OnHoverEntered);
-        simpleInteractable.hoverExited.RemoveListener(OnHoverExited);
-        simpleInteractable.selectEntered.RemoveListener(OnSelected);
-    }
-
-    private void OnHoverEntered(HoverEnterEventArgs args)
-    {
-        if (tube != null)
+        private void Awake()
         {
-            tube.SetHoverHighlight(true);
-        }
-    }
-
-    private void OnHoverExited(HoverExitEventArgs args)
-    {
-        if (tube != null)
-        {
-            tube.SetHoverHighlight(false);
-        }
-    }
-
-    private void OnSelected(SelectEnterEventArgs args)
-    {
-        if (manager == null || tube == null)
-        {
-            Debug.LogWarning(name + ": Missing manager or tube reference.");
-            return;
+            simpleInteractable = GetComponent<XRSimpleInteractable>();
         }
 
-        manager.SelectTube(tube);
+        private void OnEnable()
+        {
+            simpleInteractable.hoverEntered.AddListener(OnHoverEntered);
+            simpleInteractable.hoverExited.AddListener(OnHoverExited);
+            simpleInteractable.selectEntered.AddListener(OnSelected);
+        }
+
+        private void OnDisable()
+        {
+            simpleInteractable.hoverEntered.RemoveListener(OnHoverEntered);
+            simpleInteractable.hoverExited.RemoveListener(OnHoverExited);
+            simpleInteractable.selectEntered.RemoveListener(OnSelected);
+        }
+
+        public void SetInteractionEnabled(bool canInteract)
+        {
+            if (simpleInteractable != null)
+            {
+                simpleInteractable.enabled = canInteract;
+            }
+
+            if (!canInteract && tube != null)
+            {
+                tube.SetHoverHighlight(false);
+                tube.SetSelectedHighlight(false);
+                tube.ReturnToOriginalPose();
+            }
+        }
+
+        private void OnHoverEntered(HoverEnterEventArgs args)
+        {
+            if (tube != null)
+            {
+                tube.SetHoverHighlight(true);
+            }
+        }
+
+        private void OnHoverExited(HoverExitEventArgs args)
+        {
+            if (tube != null)
+            {
+                tube.SetHoverHighlight(false);
+            }
+        }
+
+        private void OnSelected(SelectEnterEventArgs args)
+        {
+            if (manager == null || tube == null)
+            {
+                Debug.LogWarning(name + ": Missing manager or tube reference.");
+                return;
+            }
+
+            manager.SelectTube(tube);
+        }
     }
 }
