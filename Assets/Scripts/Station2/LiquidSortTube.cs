@@ -30,10 +30,8 @@ namespace Station2
         public LiquidColor[] startingColors;
 
         [Header("Visual Feedback")]
-        public Renderer[] highlightRenderers;
-        public Color normalHighlightColor = Color.white;
-        public Color hoverHighlightColor = Color.yellow;
-        public Color selectedHighlightColor = Color.cyan;
+        public GameObject[] hoverHighlightObjects;
+        private bool isSelectedAsSource = false;
 
         [Header("Selection / Pour Animation")]
         public float selectedLiftHeight = 0.18f;
@@ -268,37 +266,28 @@ namespace Station2
 
         public void SetHoverHighlight(bool isHovering)
         {
-            if (highlightRenderers == null)
-            {
+            if (isSelectedAsSource)
+                isHovering = false;
+
+            if (hoverHighlightObjects == null)
                 return;
-            }
 
-            Color targetColor = isHovering ? hoverHighlightColor : normalHighlightColor;
-
-            foreach (Renderer rend in highlightRenderers)
+            foreach (GameObject highlightObject in hoverHighlightObjects)
             {
-                if (rend != null)
+                if (highlightObject != null)
                 {
-                    rend.material.color = targetColor;
+                    highlightObject.SetActive(isHovering);
                 }
             }
         }
 
         public void SetSelectedHighlight(bool isSelected)
         {
-            if (highlightRenderers == null)
-            {
-                return;
-            }
+            isSelectedAsSource = isSelected;
 
-            Color targetColor = isSelected ? selectedHighlightColor : normalHighlightColor;
-
-            foreach (Renderer rend in highlightRenderers)
+            if (isSelected)
             {
-                if (rend != null)
-                {
-                    rend.material.color = targetColor;
-                }
+                SetHoverHighlight(false);
             }
         }
 

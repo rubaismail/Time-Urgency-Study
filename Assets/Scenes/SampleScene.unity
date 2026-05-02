@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &6641366 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 392324819647029546, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
+  m_PrefabInstance: {fileID: 321266686}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &40576086 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7974502529752374526, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
@@ -434,6 +439,14 @@ PrefabInstance:
       propertyPath: 'startingColors.Array.data[3]'
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5201308219921822118, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
+      propertyPath: hoverHighlightObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5201308219921822118, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
+      propertyPath: 'hoverHighlightObjects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1921640810}
     - target: {fileID: 6118049552902984134, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.7194798
@@ -589,6 +602,14 @@ PrefabInstance:
       propertyPath: 'startingColors.Array.data[2]'
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 5201308219921822118, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
+      propertyPath: hoverHighlightObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5201308219921822118, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
+      propertyPath: 'hoverHighlightObjects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 6641366}
     - target: {fileID: 6118049552902984134, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.7194798
@@ -638,6 +659,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
+--- !u!1 &336545725 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 392324819647029546, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
+  m_PrefabInstance: {fileID: 862310198}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &416926854
 GameObject:
   m_ObjectHideFlags: 0
@@ -1406,6 +1432,14 @@ PrefabInstance:
       propertyPath: startingColors.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5201308219921822118, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
+      propertyPath: hoverHighlightObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5201308219921822118, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
+      propertyPath: 'hoverHighlightObjects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1183063194}
     - target: {fileID: 6118049552902984134, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.7194798
@@ -1459,6 +1493,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
+--- !u!1 &817583449 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 392324819647029546, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
+  m_PrefabInstance: {fileID: 1163102642}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &829282858 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5201308219921822118, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
@@ -1522,6 +1561,14 @@ PrefabInstance:
       propertyPath: 'startingColors.Array.data[3]'
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5201308219921822118, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
+      propertyPath: hoverHighlightObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5201308219921822118, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
+      propertyPath: 'hoverHighlightObjects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 336545725}
     - target: {fileID: 6118049552902984134, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.7194798
@@ -2144,6 +2191,14 @@ PrefabInstance:
       propertyPath: 'startingColors.Array.data[3]'
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5201308219921822118, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
+      propertyPath: hoverHighlightObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5201308219921822118, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
+      propertyPath: 'hoverHighlightObjects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 817583449}
     - target: {fileID: 6118049552902984134, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.7194798
@@ -2193,6 +2248,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
+--- !u!1 &1183063194 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 392324819647029546, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
+  m_PrefabInstance: {fileID: 813942575}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1192905100
 GameObject:
   m_ObjectHideFlags: 0
@@ -2853,6 +2913,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
+--- !u!1 &1483784715 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 392324819647029546, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
+  m_PrefabInstance: {fileID: 9155637089516179234}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1548251155
 GameObject:
   m_ObjectHideFlags: 0
@@ -3739,6 +3804,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03aa800ed1624499baafe36a0139e684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Station2.LiquidSortTubeSelector
+--- !u!1 &1921640810 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 392324819647029546, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
+  m_PrefabInstance: {fileID: 303574849}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1937042959 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7974502529752374526, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
@@ -3998,6 +4068,14 @@ PrefabInstance:
       propertyPath: 'startingColors.Array.data[2]'
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5201308219921822118, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
+      propertyPath: hoverHighlightObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5201308219921822118, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
+      propertyPath: 'hoverHighlightObjects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1483784715}
     - target: {fileID: 6118049552902984134, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.7194798
