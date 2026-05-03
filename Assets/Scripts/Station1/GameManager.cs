@@ -1,6 +1,4 @@
-using System.Globalization;
 using UnityEngine;
-using TMPro;
 
 namespace Station1
 {
@@ -26,23 +24,19 @@ namespace Station1
         public float timeRemaining;
         public float timeToCompletion = 0f;
 
-        [Header("UI")]
-        public GameObject timerUIRoot;
-        public TextMeshPro timerText;
-
         [Header("References")]
         public HanoiManager hanoiManager;
         public Disk[] allDisks;
         public GameObject startButtonObject;
         public DataLogger dataLogger;
-        
+        public TimePressureController timePressureController;
+
         [Header("Latest Result")]
         public TaskResult lastResult;
 
         private void Start()
         {
             ResetTaskToIdleState();
-            UpdateTimerVisual();
             UpdateStartButtonVisual();
         }
 
@@ -56,7 +50,7 @@ namespace Station1
             if (timeRemaining < 0f)
                 timeRemaining = 0f;
 
-            UpdateTimerVisual();
+            UpdateTimePressure();
 
             if (hanoiManager != null && hanoiManager.CheckWin())
             {
@@ -87,7 +81,11 @@ namespace Station1
                 hanoiManager.RefreshAllGrabStates();
             }
 
-            UpdateTimerVisual();
+            if (timePressureController != null)
+            {
+                timePressureController.StartPressure(ConvertToPressureMode(), timeLimit);
+            }
+
             UpdateStartButtonVisual();
 
             Debug.Log("Task 1 Started!");
@@ -105,13 +103,20 @@ namespace Station1
             timeToCompletion = timeLimit - timeRemaining;
 
             DisableAllDiskGrabs();
+
             BuildTaskResult(true);
             PrintTaskResult();
-            
+
             if (dataLogger != null)
+            {
                 dataLogger.LogTaskResult(lastResult);
-            
-            UpdateTimerVisual();
+            }
+
+            if (timePressureController != null)
+            {
+                timePressureController.EndPressure(true);
+            }
+
             UpdateStartButtonVisual();
 
             Debug.Log("TASK SUCCEEDED");
@@ -130,13 +135,20 @@ namespace Station1
             timeToCompletion = timeLimit;
 
             DisableAllDiskGrabs();
+
             BuildTaskResult(false);
             PrintTaskResult();
-            
+
             if (dataLogger != null)
+            {
                 dataLogger.LogTaskResult(lastResult);
-            
-            UpdateTimerVisual();
+            }
+
+            if (timePressureController != null)
+            {
+                timePressureController.EndPressure(false);
+            }
+
             UpdateStartButtonVisual();
 
             Debug.Log("TASK FAILED: TIME RAN OUT");
@@ -157,7 +169,12 @@ namespace Station1
                 hanoiManager.ClearAllPegs();
             }
 
-            UpdateTimerVisual();
+            if (timePressureController != null)
+            {
+                timePressureController.mode = ConvertToPressureMode();
+                timePressureController.ResetToIdle();
+            }
+
             UpdateStartButtonVisual();
         }
 
@@ -176,10 +193,38 @@ namespace Station1
                 hanoiManager.ClearAllPegs();
             }
 
-            UpdateTimerVisual();
+            if (timePressureController != null)
+            {
+                timePressureController.mode = ConvertToPressureMode();
+                timePressureController.ResetToIdle();
+            }
+
             UpdateStartButtonVisual();
         }
-        
+
+        private void UpdateTimePressure()
+        {
+            if (timePressureController != null)
+            {
+                timePressureController.UpdatePressure(timeRemaining, timeLimit, taskRunning, taskEnded);
+            }
+        }
+
+        private TimePressureController.Mode ConvertToPressureMode()
+        {
+            switch (timePressureMode)
+            {
+                case TimePressureMode.AudioCountdown:
+                    return TimePressureController.Mode.AudioCountdown;
+
+                case TimePressureMode.NpcUrging:
+                    return TimePressureController.Mode.NpcUrging;
+
+                default:
+                    return TimePressureController.Mode.VisualCountdown;
+            }
+        }
+
         private void BuildTaskResult(bool successValue)
         {
             if (hanoiManager == null)
@@ -197,7 +242,7 @@ namespace Station1
                 timeLimit = timeLimit
             };
         }
-        
+
         private void PrintTaskResult()
         {
             if (lastResult == null)
@@ -226,47 +271,14 @@ namespace Station1
                     disk.SetGrabbable(false);
             }
         }
-        
+
         private void UpdateStartButtonVisual()
         {
             if (startButtonObject == null)
                 return;
 
-            // Show button only when task is idle
             bool showButton = !taskRunning;
             startButtonObject.SetActive(showButton);
-        }
-
-        private void UpdateTimerVisual()
-        {
-            if (timerUIRoot != null)
-            {
-                bool showVisualTimer = (timePressureMode == TimePressureMode.VisualCountdown);
-                timerUIRoot.SetActive(showVisualTimer);
-            }
-
-            if (timerText == null)
-                return;
-
-            if (timePressureMode != TimePressureMode.VisualCountdown)
-                return;
-
-            if (!taskRunning && !taskEnded)
-            {
-                timerText.text = "Press Button To Start";
-            }
-            else if (taskRunning)
-            {
-                timerText.text = "Time: " + Mathf.CeilToInt(timeRemaining).ToString();
-            }
-            else if (taskEnded && taskSucceeded)
-            {
-                timerText.text = "Success!";
-            }
-            else if (taskEnded && !taskSucceeded)
-            {
-                timerText.text = "Time Is Up!";
-            }
         }
     }
 }

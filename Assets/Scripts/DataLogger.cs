@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DataLogger : MonoBehaviour
 {
-   [Header("File Settings")]
+    [Header("File Settings")]
     public string fileName = "study_results.csv";
 
     [Header("Auto-Generated Session Info")]
@@ -66,5 +66,6 @@ public class DataLogger : MonoBehaviour
 
         Debug.Log("Task result written to CSV.");
         Debug.Log("CSV Path: " + filePath);
+        
     }
 }

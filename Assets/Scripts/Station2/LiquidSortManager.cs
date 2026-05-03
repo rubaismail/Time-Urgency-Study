@@ -1,5 +1,4 @@
 using UnityEngine;
-using TMPro;
 
 namespace Station2
 {
@@ -25,25 +24,25 @@ namespace Station2
         public float timeRemaining;
         public float timeToCompletion = 0f;
 
-        [Header("UI")]
-        public GameObject timerUIRoot;
-        public TextMeshPro timerText;
-
         [Header("References")]
         public LiquidSortTube[] tubes;
         public LiquidSortTubeSelector[] tubeSelectors;
         public GameObject startButtonObject;
+        public DataLogger dataLogger;
+        public TimePressureController timePressureController;
 
         [Header("Counts")]
         public int pourCount = 0;
         public int illegalPourCount = 0;
+
+        [Header("Latest Result")]
+        public TaskResult lastResult;
 
         private LiquidSortTube selectedTube;
 
         private void Start()
         {
             ResetTaskToIdleState();
-            UpdateTimerVisual();
             UpdateStartButtonVisual();
         }
 
@@ -57,7 +56,7 @@ namespace Station2
             if (timeRemaining < 0f)
                 timeRemaining = 0f;
 
-            UpdateTimerVisual();
+            UpdateTimePressure();
 
             if (CheckWin())
             {
@@ -84,7 +83,11 @@ namespace Station2
 
             EnableTubeInteraction(true);
 
-            UpdateTimerVisual();
+            if (timePressureController != null)
+            {
+                timePressureController.StartPressure(ConvertToPressureMode(), timeLimit);
+            }
+
             UpdateStartButtonVisual();
 
             Debug.Log("Liquid Sort Started!");
@@ -104,13 +107,20 @@ namespace Station2
             EnableTubeInteraction(false);
             ClearSelectedTube();
 
-            UpdateTimerVisual();
-            UpdateStartButtonVisual();
+            BuildTaskResult(true);
+            PrintTaskResult();
 
-            Debug.Log("LIQUID SORT SUCCEEDED");
-            Debug.Log("Pours: " + pourCount);
-            Debug.Log("Illegal Pours: " + illegalPourCount);
-            Debug.Log("Time To Completion: " + timeToCompletion.ToString("F2"));
+            if (dataLogger != null)
+            {
+                dataLogger.LogTaskResult(lastResult);
+            }
+
+            if (timePressureController != null)
+            {
+                timePressureController.EndPressure(true);
+            }
+
+            UpdateStartButtonVisual();
         }
 
         public void EndTaskFailure()
@@ -128,12 +138,20 @@ namespace Station2
             EnableTubeInteraction(false);
             ClearSelectedTube();
 
-            UpdateTimerVisual();
-            UpdateStartButtonVisual();
+            BuildTaskResult(false);
+            PrintTaskResult();
 
-            Debug.Log("LIQUID SORT FAILED: TIME RAN OUT");
-            Debug.Log("Pours: " + pourCount);
-            Debug.Log("Illegal Pours: " + illegalPourCount);
+            if (dataLogger != null)
+            {
+                dataLogger.LogTaskResult(lastResult);
+            }
+
+            if (timePressureController != null)
+            {
+                timePressureController.EndPressure(false);
+            }
+
+            UpdateStartButtonVisual();
         }
 
         private void ResetTaskForNewRun()
@@ -152,7 +170,12 @@ namespace Station2
             InitializeAllTubes();
             EnableTubeInteraction(false);
 
-            UpdateTimerVisual();
+            if (timePressureController != null)
+            {
+                timePressureController.mode = ConvertToPressureMode();
+                timePressureController.ResetToIdle();
+            }
+
             UpdateStartButtonVisual();
         }
 
@@ -172,7 +195,12 @@ namespace Station2
             InitializeAllTubes();
             EnableTubeInteraction(false);
 
-            UpdateTimerVisual();
+            if (timePressureController != null)
+            {
+                timePressureController.mode = ConvertToPressureMode();
+                timePressureController.ResetToIdle();
+            }
+
             UpdateStartButtonVisual();
         }
 
@@ -297,6 +325,29 @@ namespace Station2
             }
         }
 
+        private void UpdateTimePressure()
+        {
+            if (timePressureController != null)
+            {
+                timePressureController.UpdatePressure(timeRemaining, timeLimit, taskRunning, taskEnded);
+            }
+        }
+
+        private TimePressureController.Mode ConvertToPressureMode()
+        {
+            switch (timePressureMode)
+            {
+                case TimePressureMode.AudioCountdown:
+                    return TimePressureController.Mode.AudioCountdown;
+
+                case TimePressureMode.NpcUrging:
+                    return TimePressureController.Mode.NpcUrging;
+
+                default:
+                    return TimePressureController.Mode.VisualCountdown;
+            }
+        }
+
         private void UpdateStartButtonVisual()
         {
             if (startButtonObject == null)
@@ -306,36 +357,34 @@ namespace Station2
             startButtonObject.SetActive(showButton);
         }
 
-        private void UpdateTimerVisual()
+        private void BuildTaskResult(bool successValue)
         {
-            if (timerUIRoot != null)
+            lastResult = new TaskResult
             {
-                bool showVisualTimer = (timePressureMode == TimePressureMode.VisualCountdown);
-                timerUIRoot.SetActive(showVisualTimer);
-            }
+                taskName = "LiquidSort",
+                timePressureMode = timePressureMode.ToString(),
+                success = successValue,
+                moveCount = pourCount,
+                illegalMoveCount = illegalPourCount,
+                invalidDropCount = 0,
+                timeToCompletion = timeToCompletion,
+                timeLimit = timeLimit
+            };
+        }
 
-            if (timerText == null)
+        private void PrintTaskResult()
+        {
+            if (lastResult == null)
                 return;
 
-            if (timePressureMode != TimePressureMode.VisualCountdown)
-                return;
-
-            if (!taskRunning && !taskEnded)
-            {
-                timerText.text = "Press Button To Start";
-            }
-            else if (taskRunning)
-            {
-                timerText.text = "Time: " + Mathf.CeilToInt(timeRemaining).ToString();
-            }
-            else if (taskEnded && taskSucceeded)
-            {
-                timerText.text = "Success!";
-            }
-            else if (taskEnded && !taskSucceeded)
-            {
-                timerText.text = "Time Is Up!";
-            }
+            Debug.Log("----- LIQUID SORT RESULT -----");
+            Debug.Log("Task Name: " + lastResult.taskName);
+            Debug.Log("Mode: " + lastResult.timePressureMode);
+            Debug.Log("Success: " + lastResult.success);
+            Debug.Log("Pours: " + lastResult.moveCount);
+            Debug.Log("Illegal Pours: " + lastResult.illegalMoveCount);
+            Debug.Log("Time: " + lastResult.timeToCompletion.ToString("F2"));
+            Debug.Log("------------------------------");
         }
     }
 }

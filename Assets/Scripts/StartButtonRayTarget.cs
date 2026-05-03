@@ -4,12 +4,20 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class StartButtonRayTarget : MonoBehaviour
 {
-    private static bool anyTaskRunning = false;
+    public enum TaskToStart
+    {
+        Hanoi,
+        LiquidSort
+    }
 
-    [Header("Task 1 (Hanoi)")]
+    [Header("Session Manager")]
+    public StudySessionManager studySessionManager;
+
+    [Header("Which Task Does This Button Start?")]
+    public TaskToStart taskToStart = TaskToStart.Hanoi;
+
+    [Header("Task Managers")]
     public Station1.GameManager hanoiGameManager;
-
-    [Header("Task 2 (Liquid Sort)")]
     public Station2.LiquidSortManager liquidSortManager;
 
     [Header("Hover Color")]
@@ -23,13 +31,6 @@ public class StartButtonRayTarget : MonoBehaviour
     {
         interactable = GetComponent<XRSimpleInteractable>();
         SetHoverColor(normalColor);
-    }
-
-    private void Update()
-    {
-        anyTaskRunning =
-            (hanoiGameManager != null && hanoiGameManager.taskRunning) ||
-            (liquidSortManager != null && liquidSortManager.taskRunning);
     }
 
     private void OnEnable()
@@ -64,27 +65,53 @@ public class StartButtonRayTarget : MonoBehaviour
 
     private void OnSelectEnter(SelectEnterEventArgs args)
     {
-        if (anyTaskRunning)
+        if (studySessionManager == null)
         {
-            Debug.Log("Cannot start another task while one task is already running.");
+            Debug.LogWarning(name + ": Missing StudySessionManager reference.");
             return;
         }
 
-        Debug.Log("Start Button Selected");
-
-        if (hanoiGameManager != null)
+        if (!studySessionManager.CanStartTask())
         {
-            hanoiGameManager.StartGame();
-            anyTaskRunning = true;
             return;
         }
 
-        if (liquidSortManager != null)
+        Debug.Log("Start Button Selected: " + taskToStart);
+
+        switch (taskToStart)
         {
-            liquidSortManager.StartGame();
-            anyTaskRunning = true;
+            case TaskToStart.Hanoi:
+                StartHanoi();
+                break;
+
+            case TaskToStart.LiquidSort:
+                StartLiquidSort();
+                break;
+        }
+
+        studySessionManager.RefreshTaskStartButtons();
+    }
+
+    private void StartHanoi()
+    {
+        if (hanoiGameManager == null)
+        {
+            Debug.LogWarning(name + ": Missing Hanoi GameManager reference.");
             return;
         }
+
+        hanoiGameManager.StartGame();
+    }
+
+    private void StartLiquidSort()
+    {
+        if (liquidSortManager == null)
+        {
+            Debug.LogWarning(name + ": Missing LiquidSortManager reference.");
+            return;
+        }
+
+        liquidSortManager.StartGame();
     }
 
     private void SetHoverColor(Color color)
