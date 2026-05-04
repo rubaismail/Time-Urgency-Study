@@ -22,6 +22,9 @@ public class StudySessionManager : MonoBehaviour
     [Header("Rating UI")]
     public RatingPanelManager ratingPanelManager;
     public bool preTaskRatingCompleted = false;
+    
+    [Header("Instruction UI")]
+    public TaskInstructionManager taskInstructionManager;
 
     [Header("Task Outcome Message")]
     public TaskOutcomeMessageManager taskOutcomeMessageManager;
@@ -280,6 +283,12 @@ public class StudySessionManager : MonoBehaviour
             return false;
         }
 
+        if (taskInstructionManager != null && taskInstructionManager.IsInstructionPanelOpen)
+        {
+            Debug.Log("Cannot start task while instruction panel is open.");
+            return false;
+        }
+
         if (IsAnyTaskRunning())
         {
             Debug.Log("Cannot start task. Another task is already running.");
@@ -291,12 +300,17 @@ public class StudySessionManager : MonoBehaviour
 
     public void RefreshTaskStartButtons()
     {
+        bool instructionPanelOpen =
+            taskInstructionManager != null &&
+            taskInstructionManager.IsInstructionPanelOpen;
+
         bool canShowTaskButtons =
             hasChosenMode &&
             preTaskRatingCompleted &&
             !postTaskRatingPending &&
             !IsAnyTaskRunning() &&
-            !IsRatingPanelOpen();
+            !IsRatingPanelOpen() &&
+            !instructionPanelOpen;
 
         if (hanoiGameManager != null && hanoiGameManager.startButtonObject != null)
         {

@@ -4,21 +4,11 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class StartButtonRayTarget : MonoBehaviour
 {
-    public enum TaskToStart
-    {
-        Hanoi,
-        LiquidSort
-    }
-
     [Header("Session Manager")]
     public StudySessionManager studySessionManager;
 
-    [Header("Which Task Does This Button Start?")]
-    public TaskToStart taskToStart = TaskToStart.Hanoi;
-
-    [Header("Task Managers")]
-    public Station1.GameManager hanoiGameManager;
-    public Station2.LiquidSortManager liquidSortManager;
+    [Header("Instruction Manager")]
+    public TaskInstructionManager taskInstructionManager;
 
     [Header("Hover Color")]
     public Renderer[] highlightRenderers;
@@ -71,47 +61,22 @@ public class StartButtonRayTarget : MonoBehaviour
             return;
         }
 
+        if (taskInstructionManager == null)
+        {
+            Debug.LogWarning(name + ": Missing TaskInstructionManager reference.");
+            return;
+        }
+
         if (!studySessionManager.CanStartTask())
         {
             return;
         }
 
-        Debug.Log("Start Button Selected: " + taskToStart);
+        Debug.Log("Start Button Selected. Showing instructions.");
 
-        switch (taskToStart)
-        {
-            case TaskToStart.Hanoi:
-                StartHanoi();
-                break;
-
-            case TaskToStart.LiquidSort:
-                StartLiquidSort();
-                break;
-        }
+        taskInstructionManager.ShowInstructions();
 
         studySessionManager.RefreshTaskStartButtons();
-    }
-
-    private void StartHanoi()
-    {
-        if (hanoiGameManager == null)
-        {
-            Debug.LogWarning(name + ": Missing Hanoi GameManager reference.");
-            return;
-        }
-
-        hanoiGameManager.StartGame();
-    }
-
-    private void StartLiquidSort()
-    {
-        if (liquidSortManager == null)
-        {
-            Debug.LogWarning(name + ": Missing LiquidSortManager reference.");
-            return;
-        }
-
-        liquidSortManager.StartGame();
     }
 
     private void SetHoverColor(Color color)
