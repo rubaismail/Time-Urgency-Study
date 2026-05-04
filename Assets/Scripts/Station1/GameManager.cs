@@ -30,6 +30,7 @@ namespace Station1
         public GameObject startButtonObject;
         public DataLogger dataLogger;
         public TimePressureController timePressureController;
+        public StudySessionManager studySessionManager;
 
         [Header("Latest Result")]
         public TaskResult lastResult;
@@ -118,6 +119,7 @@ namespace Station1
             }
 
             UpdateStartButtonVisual();
+            NotifyStudySessionTaskFinished();
 
             Debug.Log("TASK SUCCEEDED");
         }
@@ -150,8 +152,21 @@ namespace Station1
             }
 
             UpdateStartButtonVisual();
+            NotifyStudySessionTaskFinished();
 
             Debug.Log("TASK FAILED: TIME RAN OUT");
+        }
+
+        private void NotifyStudySessionTaskFinished()
+        {
+            if (studySessionManager != null)
+            {
+                studySessionManager.OnTaskFinished("TowersOfHanoi");
+            }
+            else
+            {
+                Debug.LogWarning("Hanoi GameManager is missing StudySessionManager reference.");
+            }
         }
 
         private void ResetTaskForNewRun()

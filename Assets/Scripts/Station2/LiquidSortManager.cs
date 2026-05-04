@@ -30,6 +30,7 @@ namespace Station2
         public GameObject startButtonObject;
         public DataLogger dataLogger;
         public TimePressureController timePressureController;
+        public StudySessionManager studySessionManager;
 
         [Header("Counts")]
         public int pourCount = 0;
@@ -121,6 +122,7 @@ namespace Station2
             }
 
             UpdateStartButtonVisual();
+            NotifyStudySessionTaskFinished();
         }
 
         public void EndTaskFailure()
@@ -152,6 +154,19 @@ namespace Station2
             }
 
             UpdateStartButtonVisual();
+            NotifyStudySessionTaskFinished();
+        }
+
+        private void NotifyStudySessionTaskFinished()
+        {
+            if (studySessionManager != null)
+            {
+                studySessionManager.OnTaskFinished("LiquidSort");
+            }
+            else
+            {
+                Debug.LogWarning("LiquidSortManager is missing StudySessionManager reference.");
+            }
         }
 
         private void ResetTaskForNewRun()

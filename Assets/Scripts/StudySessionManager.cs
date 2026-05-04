@@ -1,3 +1,4 @@
+using System.Collections;
 using RatingPanel;
 using UnityEngine;
 
@@ -22,6 +23,10 @@ public class StudySessionManager : MonoBehaviour
     public RatingPanelManager ratingPanelManager;
     public bool preTaskRatingCompleted = false;
 
+    [Header("Post-Task Rating Delay")]
+    public float postTaskPanelDelay = 2f;
+    public bool postTaskRatingPending = false;
+
     [Header("Movement Lock")]
     public Behaviour[] movementComponentsToDisable;
     public GameObject[] movementObjectsToDisable;
@@ -35,11 +40,13 @@ public class StudySessionManager : MonoBehaviour
     public TimePressureController liquidSortPressureController;
 
     private bool movementShouldBeEnabled = false;
+    private Coroutine postTaskRatingCoroutine;
 
     private void Awake()
     {
         hasChosenMode = false;
         preTaskRatingCompleted = false;
+        postTaskRatingPending = false;
         movementShouldBeEnabled = false;
 
         ForceMovementState();
@@ -89,6 +96,7 @@ public class StudySessionManager : MonoBehaviour
         }
 
         preTaskRatingCompleted = false;
+        postTaskRatingPending = false;
         movementShouldBeEnabled = false;
         ForceMovementState();
 
@@ -117,6 +125,7 @@ public class StudySessionManager : MonoBehaviour
     {
         hasChosenMode = true;
         preTaskRatingCompleted = false;
+        postTaskRatingPending = false;
 
         ApplyModeToAllTasks();
 
@@ -161,7 +170,24 @@ public class StudySessionManager : MonoBehaviour
 
     public void OnTaskFinished(string taskName)
     {
+        postTaskRatingPending = true;
         RefreshTaskStartButtons();
+
+        if (postTaskRatingCoroutine != null)
+        {
+            StopCoroutine(postTaskRatingCoroutine);
+        }
+
+        postTaskRatingCoroutine = StartCoroutine(ShowPostTaskRatingAfterDelay(taskName));
+    }
+
+    private IEnumerator ShowPostTaskRatingAfterDelay(string taskName)
+    {
+        Debug.Log("Task finished. Waiting before showing post-task rating panel: " + taskName);
+
+        yield return new WaitForSeconds(postTaskPanelDelay);
+
+        postTaskRatingPending = false;
 
         if (ratingPanelManager != null)
         {
@@ -173,6 +199,8 @@ public class StudySessionManager : MonoBehaviour
         }
 
         RefreshTaskStartButtons();
+
+        postTaskRatingCoroutine = null;
     }
 
     public void RandomizeMode()
@@ -210,6 +238,12 @@ public class StudySessionManager : MonoBehaviour
             return false;
         }
 
+        if (postTaskRatingPending)
+        {
+            Debug.Log("Cannot start task while post-task rating is pending.");
+            return false;
+        }
+
         if (IsRatingPanelOpen())
         {
             Debug.Log("Cannot start task while rating panel is open.");
@@ -230,6 +264,7 @@ public class StudySessionManager : MonoBehaviour
         bool canShowTaskButtons =
             hasChosenMode &&
             preTaskRatingCompleted &&
+            !postTaskRatingPending &&
             !IsAnyTaskRunning() &&
             !IsRatingPanelOpen();
 
