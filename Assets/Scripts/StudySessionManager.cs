@@ -1,3 +1,4 @@
+using RatingPanel;
 using UnityEngine;
 
 public class StudySessionManager : MonoBehaviour
@@ -17,6 +18,10 @@ public class StudySessionManager : MonoBehaviour
     [Header("Startup UI")]
     public GameObject modalitySelectionUI;
 
+    [Header("Rating UI")]
+    public RatingPanelManager ratingPanelManager;
+    public bool preTaskRatingCompleted = false;
+
     [Header("Movement Lock")]
     public Behaviour[] movementComponentsToDisable;
     public GameObject[] movementObjectsToDisable;
@@ -34,6 +39,7 @@ public class StudySessionManager : MonoBehaviour
     private void Awake()
     {
         hasChosenMode = false;
+        preTaskRatingCompleted = false;
         movementShouldBeEnabled = false;
 
         ForceMovementState();
@@ -82,6 +88,7 @@ public class StudySessionManager : MonoBehaviour
             modalitySelectionUI.SetActive(true);
         }
 
+        preTaskRatingCompleted = false;
         movementShouldBeEnabled = false;
         ForceMovementState();
 
@@ -109,6 +116,7 @@ public class StudySessionManager : MonoBehaviour
     private void ConfirmSelectedMode()
     {
         hasChosenMode = true;
+        preTaskRatingCompleted = false;
 
         ApplyModeToAllTasks();
 
@@ -120,9 +128,51 @@ public class StudySessionManager : MonoBehaviour
         movementShouldBeEnabled = true;
         ForceMovementState();
 
+        if (ratingPanelManager != null)
+        {
+            ratingPanelManager.ShowPreTaskRating(selectedMode.ToString());
+        }
+        else
+        {
+            Debug.LogWarning("StudySessionManager is missing RatingPanelManager. Skipping pre-task rating.");
+            preTaskRatingCompleted = true;
+        }
+
         RefreshTaskStartButtons();
 
         Debug.Log("Confirmed study mode: " + selectedMode);
+    }
+
+    public void OnRatingPanelSubmitted(RatingPanelManager.RatingStage ratingStage)
+    {
+        if (ratingStage == RatingPanelManager.RatingStage.PreTask)
+        {
+            preTaskRatingCompleted = true;
+            Debug.Log("Pre-task rating completed.");
+        }
+
+        if (ratingStage == RatingPanelManager.RatingStage.PostTask)
+        {
+            Debug.Log("Post-task rating completed.");
+        }
+
+        RefreshTaskStartButtons();
+    }
+
+    public void OnTaskFinished(string taskName)
+    {
+        RefreshTaskStartButtons();
+
+        if (ratingPanelManager != null)
+        {
+            ratingPanelManager.ShowPostTaskRating(taskName, selectedMode.ToString());
+        }
+        else
+        {
+            Debug.LogWarning("StudySessionManager is missing RatingPanelManager. Cannot show post-task rating.");
+        }
+
+        RefreshTaskStartButtons();
     }
 
     public void RandomizeMode()
@@ -141,11 +191,28 @@ public class StudySessionManager : MonoBehaviour
         return hanoiRunning || liquidSortRunning;
     }
 
+    public bool IsRatingPanelOpen()
+    {
+        return ratingPanelManager != null && ratingPanelManager.IsPanelOpen;
+    }
+
     public bool CanStartTask()
     {
         if (!hasChosenMode)
         {
             Debug.Log("Cannot start task yet. No time pressure mode has been selected.");
+            return false;
+        }
+
+        if (!preTaskRatingCompleted)
+        {
+            Debug.Log("Cannot start task yet. Pre-task rating has not been completed.");
+            return false;
+        }
+
+        if (IsRatingPanelOpen())
+        {
+            Debug.Log("Cannot start task while rating panel is open.");
             return false;
         }
 
@@ -160,7 +227,11 @@ public class StudySessionManager : MonoBehaviour
 
     public void RefreshTaskStartButtons()
     {
-        bool canShowTaskButtons = hasChosenMode && !IsAnyTaskRunning();
+        bool canShowTaskButtons =
+            hasChosenMode &&
+            preTaskRatingCompleted &&
+            !IsAnyTaskRunning() &&
+            !IsRatingPanelOpen();
 
         if (hanoiGameManager != null && hanoiGameManager.startButtonObject != null)
         {

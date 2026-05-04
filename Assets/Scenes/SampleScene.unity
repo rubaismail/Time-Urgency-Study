@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 67062845}
   - component: {fileID: 67062844}
   - component: {fileID: 67062843}
+  - component: {fileID: 67062846}
   m_Layer: 0
   m_Name: Button4
   m_TagString: Untagged
@@ -250,6 +251,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 67062841}
   m_CullTransparentMesh: 1
+--- !u!114 &67062846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67062841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ae617020f4188a50a9046abda6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingChoiceButton
+  manager: {fileID: 1974188977}
+  question: 3
+  value: 4
+  selectedScaleMultiplier: 1.28
 --- !u!1001 &75578486
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -617,6 +634,7 @@ GameObject:
   - component: {fileID: 143456591}
   - component: {fileID: 143456590}
   - component: {fileID: 143456589}
+  - component: {fileID: 143456592}
   m_Layer: 0
   m_Name: Button2
   m_TagString: Untagged
@@ -726,6 +744,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 143456587}
   m_CullTransparentMesh: 1
+--- !u!114 &143456592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143456587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ae617020f4188a50a9046abda6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingChoiceButton
+  manager: {fileID: 1974188977}
+  question: 2
+  value: 2
+  selectedScaleMultiplier: 1.28
 --- !u!1 &149444805
 GameObject:
   m_ObjectHideFlags: 0
@@ -2277,6 +2311,7 @@ GameObject:
   - component: {fileID: 347313979}
   - component: {fileID: 347313978}
   - component: {fileID: 347313977}
+  - component: {fileID: 347313980}
   m_Layer: 0
   m_Name: Button2
   m_TagString: Untagged
@@ -2386,6 +2421,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 347313975}
   m_CullTransparentMesh: 1
+--- !u!114 &347313980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347313975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ae617020f4188a50a9046abda6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingChoiceButton
+  manager: {fileID: 1974188977}
+  question: 3
+  value: 2
+  selectedScaleMultiplier: 1.28
 --- !u!1 &398940398
 GameObject:
   m_ObjectHideFlags: 0
@@ -2398,6 +2449,7 @@ GameObject:
   - component: {fileID: 398940402}
   - component: {fileID: 398940401}
   - component: {fileID: 398940400}
+  - component: {fileID: 398940403}
   m_Layer: 0
   m_Name: Button1
   m_TagString: Untagged
@@ -2507,6 +2559,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 398940398}
   m_CullTransparentMesh: 1
+--- !u!114 &398940403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398940398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ae617020f4188a50a9046abda6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingChoiceButton
+  manager: {fileID: 1974188977}
+  question: 0
+  value: 1
+  selectedScaleMultiplier: 1.28
 --- !u!1 &400834955
 GameObject:
   m_ObjectHideFlags: 0
@@ -2519,6 +2587,7 @@ GameObject:
   - component: {fileID: 400834959}
   - component: {fileID: 400834958}
   - component: {fileID: 400834957}
+  - component: {fileID: 400834960}
   m_Layer: 0
   m_Name: Button3
   m_TagString: Untagged
@@ -2628,6 +2697,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 400834955}
   m_CullTransparentMesh: 1
+--- !u!114 &400834960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400834955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ae617020f4188a50a9046abda6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingChoiceButton
+  manager: {fileID: 1974188977}
+  question: 3
+  value: 3
+  selectedScaleMultiplier: 1.28
 --- !u!1 &408321470
 GameObject:
   m_ObjectHideFlags: 0
@@ -2640,6 +2725,7 @@ GameObject:
   - component: {fileID: 408321474}
   - component: {fileID: 408321473}
   - component: {fileID: 408321472}
+  - component: {fileID: 408321475}
   m_Layer: 0
   m_Name: Button2
   m_TagString: Untagged
@@ -2749,6 +2835,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 408321470}
   m_CullTransparentMesh: 1
+--- !u!114 &408321475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 408321470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ae617020f4188a50a9046abda6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingChoiceButton
+  manager: {fileID: 1974188977}
+  question: 4
+  value: 2
+  selectedScaleMultiplier: 1.28
 --- !u!1 &416926854
 GameObject:
   m_ObjectHideFlags: 0
@@ -3208,8 +3310,8 @@ MonoBehaviour:
   startInstructionMessage: Press Button To Start
   visualTimerRoot: {fileID: 893754101}
   timerText: {fileID: 1271906877}
-  npcTextRoot: {fileID: 893754101}
-  npcText: {fileID: 1271906877}
+  npcTextRoot: {fileID: 0}
+  npcText: {fileID: 0}
   audioSource: {fileID: 0}
   warningClip: {fileID: 0}
   finalCountdownClip: {fileID: 0}
@@ -3467,6 +3569,7 @@ GameObject:
   - component: {fileID: 520992354}
   - component: {fileID: 520992353}
   - component: {fileID: 520992352}
+  - component: {fileID: 520992355}
   m_Layer: 0
   m_Name: Button3
   m_TagString: Untagged
@@ -3576,6 +3679,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 520992350}
   m_CullTransparentMesh: 1
+--- !u!114 &520992355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520992350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ae617020f4188a50a9046abda6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingChoiceButton
+  manager: {fileID: 1974188977}
+  question: 1
+  value: 3
+  selectedScaleMultiplier: 1.28
 --- !u!1 &547355265
 GameObject:
   m_ObjectHideFlags: 0
@@ -4438,6 +4557,7 @@ GameObject:
   - component: {fileID: 683634898}
   - component: {fileID: 683634897}
   - component: {fileID: 683634896}
+  - component: {fileID: 683634899}
   m_Layer: 0
   m_Name: Button2
   m_TagString: Untagged
@@ -4547,6 +4667,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 683634894}
   m_CullTransparentMesh: 1
+--- !u!114 &683634899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683634894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ae617020f4188a50a9046abda6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingChoiceButton
+  manager: {fileID: 1974188977}
+  question: 0
+  value: 2
+  selectedScaleMultiplier: 1.28
 --- !u!1 &688838127
 GameObject:
   m_ObjectHideFlags: 0
@@ -5030,6 +5166,7 @@ GameObject:
   - component: {fileID: 759038636}
   - component: {fileID: 759038635}
   - component: {fileID: 759038634}
+  - component: {fileID: 759038637}
   m_Layer: 0
   m_Name: Button4
   m_TagString: Untagged
@@ -5139,6 +5276,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 759038632}
   m_CullTransparentMesh: 1
+--- !u!114 &759038637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759038632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ae617020f4188a50a9046abda6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingChoiceButton
+  manager: {fileID: 1974188977}
+  question: 2
+  value: 4
+  selectedScaleMultiplier: 1.28
 --- !u!1 &805164004
 GameObject:
   m_ObjectHideFlags: 0
@@ -5515,6 +5668,7 @@ GameObject:
   - component: {fileID: 818319832}
   - component: {fileID: 818319831}
   - component: {fileID: 818319830}
+  - component: {fileID: 818319833}
   m_Layer: 0
   m_Name: Button4
   m_TagString: Untagged
@@ -5624,6 +5778,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 818319828}
   m_CullTransparentMesh: 1
+--- !u!114 &818319833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818319828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ae617020f4188a50a9046abda6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingChoiceButton
+  manager: {fileID: 1974188977}
+  question: 1
+  value: 4
+  selectedScaleMultiplier: 1.28
 --- !u!114 &829282858 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5201308219921822118, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
@@ -5839,6 +6009,7 @@ GameObject:
   - component: {fileID: 859177752}
   - component: {fileID: 859177751}
   - component: {fileID: 859177750}
+  - component: {fileID: 859177753}
   m_Layer: 0
   m_Name: Button5
   m_TagString: Untagged
@@ -5948,6 +6119,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 859177748}
   m_CullTransparentMesh: 1
+--- !u!114 &859177753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859177748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ae617020f4188a50a9046abda6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingChoiceButton
+  manager: {fileID: 1974188977}
+  question: 4
+  value: 5
+  selectedScaleMultiplier: 1.28
 --- !u!1 &861813015
 GameObject:
   m_ObjectHideFlags: 0
@@ -6452,6 +6639,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 885513562}
   m_CullTransparentMesh: 1
+--- !u!1 &893534899
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 893534900}
+  m_Layer: 0
+  m_Name: UI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &893534900
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893534899}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2070633705}
+  - {fileID: 1974188973}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &893754101
 GameObject:
   m_ObjectHideFlags: 0
@@ -6496,6 +6716,7 @@ GameObject:
   - component: {fileID: 895684494}
   - component: {fileID: 895684493}
   - component: {fileID: 895684492}
+  - component: {fileID: 895684495}
   m_Layer: 0
   m_Name: Button5
   m_TagString: Untagged
@@ -6605,6 +6826,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 895684490}
   m_CullTransparentMesh: 1
+--- !u!114 &895684495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895684490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ae617020f4188a50a9046abda6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingChoiceButton
+  manager: {fileID: 1974188977}
+  question: 0
+  value: 5
+  selectedScaleMultiplier: 1.28
 --- !u!1 &921917879
 GameObject:
   m_ObjectHideFlags: 0
@@ -6651,6 +6888,7 @@ GameObject:
   - component: {fileID: 924315975}
   - component: {fileID: 924315974}
   - component: {fileID: 924315973}
+  - component: {fileID: 924315976}
   m_Layer: 0
   m_Name: Button3
   m_TagString: Untagged
@@ -6760,6 +6998,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924315971}
   m_CullTransparentMesh: 1
+--- !u!114 &924315976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924315971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ae617020f4188a50a9046abda6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingChoiceButton
+  manager: {fileID: 1974188977}
+  question: 2
+  value: 3
+  selectedScaleMultiplier: 1.28
 --- !u!1 &928342513
 GameObject:
   m_ObjectHideFlags: 0
@@ -6882,7 +7136,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -8692,7 +8946,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6a0a6b6e3edd4cad997fbc1e7ac95c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DataLogger
-  fileName: study_results.csv
+  taskResultsFileName: study_results.csv
+  ratingResultsFileName: rating_results.csv
   participantID: 
   sessionID: 
 --- !u!4 &1192905102
@@ -8859,6 +9114,7 @@ GameObject:
   - component: {fileID: 1243892472}
   - component: {fileID: 1243892471}
   - component: {fileID: 1243892470}
+  - component: {fileID: 1243892473}
   m_Layer: 0
   m_Name: Button4
   m_TagString: Untagged
@@ -8968,6 +9224,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1243892468}
   m_CullTransparentMesh: 1
+--- !u!114 &1243892473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243892468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ae617020f4188a50a9046abda6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingChoiceButton
+  manager: {fileID: 1974188977}
+  question: 0
+  value: 4
+  selectedScaleMultiplier: 1.28
 --- !u!1 &1252271846
 GameObject:
   m_ObjectHideFlags: 0
@@ -9040,6 +9312,8 @@ MonoBehaviour:
   selectedMode: 0
   hasChosenMode: 0
   modalitySelectionUI: {fileID: 2070633701}
+  ratingPanelManager: {fileID: 1974188977}
+  preTaskRatingCompleted: 0
   movementComponentsToDisable:
   - {fileID: 1472387856}
   - {fileID: 1170568964}
@@ -9076,6 +9350,7 @@ GameObject:
   - component: {fileID: 1255189393}
   - component: {fileID: 1255189392}
   - component: {fileID: 1255189391}
+  - component: {fileID: 1255189394}
   m_Layer: 0
   m_Name: Button5
   m_TagString: Untagged
@@ -9185,6 +9460,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1255189389}
   m_CullTransparentMesh: 1
+--- !u!114 &1255189394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255189389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ae617020f4188a50a9046abda6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingChoiceButton
+  manager: {fileID: 1974188977}
+  question: 2
+  value: 5
+  selectedScaleMultiplier: 1.28
 --- !u!1 &1270296882 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7917674758919744183, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
@@ -9605,7 +9896,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -9972,6 +10263,7 @@ GameObject:
   - component: {fileID: 1316697390}
   - component: {fileID: 1316697389}
   - component: {fileID: 1316697388}
+  - component: {fileID: 1316697391}
   m_Layer: 0
   m_Name: Button3
   m_TagString: Untagged
@@ -10081,6 +10373,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1316697386}
   m_CullTransparentMesh: 1
+--- !u!114 &1316697391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316697386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ae617020f4188a50a9046abda6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingChoiceButton
+  manager: {fileID: 1974188977}
+  question: 4
+  value: 3
+  selectedScaleMultiplier: 1.28
 --- !u!1 &1318462879
 GameObject:
   m_ObjectHideFlags: 0
@@ -10093,6 +10401,7 @@ GameObject:
   - component: {fileID: 1318462883}
   - component: {fileID: 1318462882}
   - component: {fileID: 1318462881}
+  - component: {fileID: 1318462884}
   m_Layer: 0
   m_Name: Button4
   m_TagString: Untagged
@@ -10202,6 +10511,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1318462879}
   m_CullTransparentMesh: 1
+--- !u!114 &1318462884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318462879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ae617020f4188a50a9046abda6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingChoiceButton
+  manager: {fileID: 1974188977}
+  question: 4
+  value: 4
+  selectedScaleMultiplier: 1.28
 --- !u!1 &1322873684
 GameObject:
   m_ObjectHideFlags: 0
@@ -10214,6 +10539,7 @@ GameObject:
   - component: {fileID: 1322873688}
   - component: {fileID: 1322873687}
   - component: {fileID: 1322873686}
+  - component: {fileID: 1322873689}
   m_Layer: 0
   m_Name: Button1
   m_TagString: Untagged
@@ -10323,6 +10649,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1322873684}
   m_CullTransparentMesh: 1
+--- !u!114 &1322873689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322873684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ae617020f4188a50a9046abda6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingChoiceButton
+  manager: {fileID: 1974188977}
+  question: 1
+  value: 1
+  selectedScaleMultiplier: 1.28
 --- !u!114 &1326176269 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8053059486601427065, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
@@ -10855,9 +11197,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8806329115733545878, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1288246449}
-    - targetCorrespondingSourceObject: {fileID: 7917674758326848202, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1974188973}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7917674758919744183, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
       insertIndex: -1
@@ -11305,6 +11644,7 @@ GameObject:
   - component: {fileID: 1487317648}
   - component: {fileID: 1487317647}
   - component: {fileID: 1487317646}
+  - component: {fileID: 1487317649}
   m_Layer: 0
   m_Name: Button5
   m_TagString: Untagged
@@ -11414,6 +11754,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1487317644}
   m_CullTransparentMesh: 1
+--- !u!114 &1487317649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487317644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ae617020f4188a50a9046abda6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingChoiceButton
+  manager: {fileID: 1974188977}
+  question: 1
+  value: 5
+  selectedScaleMultiplier: 1.28
 --- !u!1 &1506374354
 GameObject:
   m_ObjectHideFlags: 0
@@ -11426,6 +11782,7 @@ GameObject:
   - component: {fileID: 1506374358}
   - component: {fileID: 1506374357}
   - component: {fileID: 1506374356}
+  - component: {fileID: 1506374359}
   m_Layer: 0
   m_Name: Button5
   m_TagString: Untagged
@@ -11535,6 +11892,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1506374354}
   m_CullTransparentMesh: 1
+--- !u!114 &1506374359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506374354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ae617020f4188a50a9046abda6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingChoiceButton
+  manager: {fileID: 1974188977}
+  question: 3
+  value: 5
+  selectedScaleMultiplier: 1.28
 --- !u!1 &1524782728
 GameObject:
   m_ObjectHideFlags: 0
@@ -11547,6 +11920,7 @@ GameObject:
   - component: {fileID: 1524782732}
   - component: {fileID: 1524782731}
   - component: {fileID: 1524782730}
+  - component: {fileID: 1524782733}
   m_Layer: 0
   m_Name: Button2
   m_TagString: Untagged
@@ -11656,6 +12030,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1524782728}
   m_CullTransparentMesh: 1
+--- !u!114 &1524782733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524782728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ae617020f4188a50a9046abda6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingChoiceButton
+  manager: {fileID: 1974188977}
+  question: 1
+  value: 2
+  selectedScaleMultiplier: 1.28
 --- !u!1 &1546881160
 GameObject:
   m_ObjectHideFlags: 0
@@ -12103,6 +12493,7 @@ GameObject:
   - component: {fileID: 1570259811}
   - component: {fileID: 1570259810}
   - component: {fileID: 1570259809}
+  - component: {fileID: 1570259812}
   m_Layer: 0
   m_Name: Button1
   m_TagString: Untagged
@@ -12212,6 +12603,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1570259807}
   m_CullTransparentMesh: 1
+--- !u!114 &1570259812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570259807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ae617020f4188a50a9046abda6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingChoiceButton
+  manager: {fileID: 1974188977}
+  question: 2
+  value: 1
+  selectedScaleMultiplier: 1.28
 --- !u!4 &1572706167 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2774220344278030320, guid: f79d79da32127431994b684e912607db, type: 3}
@@ -12640,6 +13047,7 @@ GameObject:
   - component: {fileID: 1580549318}
   - component: {fileID: 1580549317}
   - component: {fileID: 1580549316}
+  - component: {fileID: 1580549319}
   m_Layer: 0
   m_Name: Button3
   m_TagString: Untagged
@@ -12749,6 +13157,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1580549314}
   m_CullTransparentMesh: 1
+--- !u!114 &1580549319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580549314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ae617020f4188a50a9046abda6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingChoiceButton
+  manager: {fileID: 1974188977}
+  question: 0
+  value: 3
+  selectedScaleMultiplier: 1.28
 --- !u!1 &1598269138
 GameObject:
   m_ObjectHideFlags: 0
@@ -13770,6 +14194,7 @@ GameObject:
   - component: {fileID: 1802349291}
   - component: {fileID: 1802349290}
   - component: {fileID: 1802349289}
+  - component: {fileID: 1802349292}
   m_Layer: 0
   m_Name: Button1
   m_TagString: Untagged
@@ -13879,6 +14304,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1802349287}
   m_CullTransparentMesh: 1
+--- !u!114 &1802349292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802349287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ae617020f4188a50a9046abda6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingChoiceButton
+  manager: {fileID: 1974188977}
+  question: 3
+  value: 1
+  selectedScaleMultiplier: 1.28
 --- !u!1 &1815318735
 GameObject:
   m_ObjectHideFlags: 0
@@ -15167,8 +15608,10 @@ GameObject:
   - component: {fileID: 1974188976}
   - component: {fileID: 1974188975}
   - component: {fileID: 1974188974}
+  - component: {fileID: 1974188977}
+  - component: {fileID: 1974188978}
   m_Layer: 0
-  m_Name: Canas_RatingPanel
+  m_Name: Canvas_RatingPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15181,17 +15624,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1974188972}
-  m_LocalRotation: {x: -0, y: -0.70009965, z: -0, w: 0.71404517}
-  m_LocalPosition: {x: 0, y: 0, z: 595.92236}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: 0.70009965, z: -0, w: 0.71404517}
+  m_LocalPosition: {x: 0, y: 0, z: -0.029}
+  m_LocalScale: {x: 0.00089999987, y: 0.0009, z: 0.00089999987}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1866528315}
-  m_Father: {fileID: 507059107}
+  m_Father: {fileID: 893534900}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 11.741458, y: 475.63855}
+  m_AnchoredPosition: {x: -0.911, y: 1.415}
   m_SizeDelta: {x: 1188, y: 1085}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1974188974
@@ -15244,7 +15687,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 507059111}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -15257,6 +15700,81 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1974188977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974188972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aff067a08a624a07888a3ba180e9068d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingPanelManager
+  ratingCanvasRoot: {fileID: 1974188972}
+  preTaskPanelLocation: {fileID: 0}
+  useOriginalScenePositionForPreTask: 1
+  cameraTransform: {fileID: 507059107}
+  distanceFromCamera: 1.6
+  verticalOffset: -0.05
+  placePostTaskInFrontOfCamera: 1
+  preTaskTitleObject: {fileID: 1219844998}
+  postTaskTitleObject: {fileID: 1838573966}
+  stressRow: {fileID: 1077627215}
+  calmnessRow: {fileID: 830557165}
+  moodRow: {fileID: 255957070}
+  pressureRow: {fileID: 1989852121}
+  difficultyRow: {fileID: 1252271846}
+  ratingButtons:
+  - {fileID: 398940403}
+  - {fileID: 683634899}
+  - {fileID: 1580549319}
+  - {fileID: 1243892473}
+  - {fileID: 895684495}
+  - {fileID: 1322873689}
+  - {fileID: 1524782733}
+  - {fileID: 520992355}
+  - {fileID: 818319833}
+  - {fileID: 1487317649}
+  - {fileID: 2008318944}
+  - {fileID: 408321475}
+  - {fileID: 1316697391}
+  - {fileID: 1318462884}
+  - {fileID: 859177753}
+  - {fileID: 1570259812}
+  - {fileID: 143456592}
+  - {fileID: 924315976}
+  - {fileID: 759038637}
+  - {fileID: 1255189394}
+  - {fileID: 1802349292}
+  - {fileID: 347313980}
+  - {fileID: 400834960}
+  - {fileID: 67062846}
+  - {fileID: 1506374359}
+  submitButton: {fileID: 1078083867}
+  warningText: {fileID: 0}
+  dataLogger: {fileID: 1192905101}
+  studySessionManager: {fileID: 1253243039}
+--- !u!114 &1974188978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974188972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7951c64acb0fa62458bf30a60089fe2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.UI.TrackedDeviceGraphicRaycaster
+  m_IgnoreReversedGraphics: 0
+  m_CheckFor2DOcclusion: 0
+  m_CheckFor3DOcclusion: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RaycastTriggerInteraction: 1
 --- !u!1 &1989852121
 GameObject:
   m_ObjectHideFlags: 0
@@ -15308,6 +15826,7 @@ GameObject:
   - component: {fileID: 2008318943}
   - component: {fileID: 2008318942}
   - component: {fileID: 2008318941}
+  - component: {fileID: 2008318944}
   m_Layer: 0
   m_Name: Button1
   m_TagString: Untagged
@@ -15417,6 +15936,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2008318939}
   m_CullTransparentMesh: 1
+--- !u!114 &2008318944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008318939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5ae617020f4188a50a9046abda6adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RatingPanel.RatingChoiceButton
+  manager: {fileID: 1974188977}
+  question: 4
+  value: 1
+  selectedScaleMultiplier: 1.28
 --- !u!1 &2015835614
 GameObject:
   m_ObjectHideFlags: 0
@@ -15889,17 +16424,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2070633701}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.0009, y: 0.0009, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 696930529}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 893534900}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.827, y: 1.434}
+  m_AnchoredPosition: {x: -0.881, y: 1.434}
   m_SizeDelta: {x: 1327.3, y: 954}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2070633706
@@ -16318,4 +16853,4 @@ SceneRoots:
   - {fileID: 688838129}
   - {fileID: 1192905102}
   - {fileID: 1253243040}
-  - {fileID: 2070633705}
+  - {fileID: 893534900}
