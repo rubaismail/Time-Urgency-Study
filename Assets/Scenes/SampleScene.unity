@@ -15776,6 +15776,12 @@ MonoBehaviour:
   distanceFromCamera: 1.6
   verticalOffset: -0.05
   placePostTaskInFrontOfCamera: 1
+  preventSpawningInsideWalls: 1
+  wallCheckMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  wallSafetyOffset: 0.25
+  minimumPanelDistance: 0.8
   preTaskTitleObject: {fileID: 1219844998}
   postTaskTitleObject: {fileID: 1838573966}
   stressRow: {fileID: 1077627215}

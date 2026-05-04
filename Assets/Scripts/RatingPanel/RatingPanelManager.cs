@@ -1,8 +1,8 @@
-using System;
-using DataLogging;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using System;
+using DataLogging;
 
 namespace RatingPanel
 {
@@ -35,6 +35,12 @@ namespace RatingPanel
         public float distanceFromCamera = 1.6f;
         public float verticalOffset = -0.05f;
         public bool placePostTaskInFrontOfCamera = true;
+
+        [Header("Wall / Obstacle Protection")]
+        public bool preventSpawningInsideWalls = true;
+        public LayerMask wallCheckMask = ~0;
+        public float wallSafetyOffset = 0.25f;
+        public float minimumPanelDistance = 0.8f;
 
         [Header("Titles")]
         public GameObject preTaskTitleObject;
@@ -143,7 +149,7 @@ namespace RatingPanel
 
         private void ShowPanelForPostTask()
         {
-            PlacePanelInFrontOfCamera();
+            PlacePanelInFrontOfCameraSafely();
 
             if (ratingCanvasRoot != null)
             {
@@ -172,17 +178,13 @@ namespace RatingPanel
             }
         }
 
-        private void PlacePanelInFrontOfCamera()
+        private void PlacePanelInFrontOfCameraSafely()
         {
             if (!placePostTaskInFrontOfCamera)
-            {
                 return;
-            }
 
             if (ratingCanvasRoot == null)
-            {
                 return;
-            }
 
             if (cameraTransform == null)
             {
@@ -204,13 +206,36 @@ namespace RatingPanel
 
             if (forwardFlat == Vector3.zero)
             {
-                forwardFlat = cameraTransform.forward;
+                forwardFlat = cameraTransform.forward.normalized;
             }
 
+            Vector3 rayStart = cameraTransform.position;
             Vector3 targetPosition =
-                cameraTransform.position +
+                rayStart +
                 forwardFlat * distanceFromCamera +
                 Vector3.up * verticalOffset;
+
+            if (preventSpawningInsideWalls)
+            {
+                RaycastHit hit;
+
+                if (Physics.Raycast(rayStart, forwardFlat, out hit, distanceFromCamera, wallCheckMask, QueryTriggerInteraction.Ignore))
+                {
+                    float safeDistance = hit.distance - wallSafetyOffset;
+
+                    if (safeDistance < minimumPanelDistance)
+                    {
+                        safeDistance = minimumPanelDistance;
+                    }
+
+                    targetPosition =
+                        rayStart +
+                        forwardFlat * safeDistance +
+                        Vector3.up * verticalOffset;
+
+                    Debug.Log("Rating panel was near a wall. Placing it at safe distance: " + safeDistance);
+                }
+            }
 
             ratingCanvasRoot.transform.position = targetPosition;
 
@@ -374,16 +399,12 @@ namespace RatingPanel
         private void RefreshButtonVisuals()
         {
             if (ratingButtons == null)
-            {
                 return;
-            }
 
             foreach (RatingChoiceButton ratingButton in ratingButtons)
             {
                 if (ratingButton == null)
-                {
                     continue;
-                }
 
                 bool selected = false;
 
