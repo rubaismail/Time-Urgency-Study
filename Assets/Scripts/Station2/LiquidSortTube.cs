@@ -30,6 +30,7 @@ namespace Station2
         public LiquidColor[] startingColors;
 
         [Header("Visual Feedback")]
+        public GameObject[] normalObjects;
         public GameObject[] hoverHighlightObjects;
         private bool isSelectedAsSource = false;
 
@@ -54,6 +55,7 @@ namespace Station2
         private void Start()
         {
             InitializeTube();
+            SetHoverHighlight(false);
         }
 
         public void InitializeTube()
@@ -249,16 +251,22 @@ namespace Station2
             {
                 case LiquidColor.Red:
                     return Color.red;
+
                 case LiquidColor.Blue:
                     return Color.blue;
+
                 case LiquidColor.Green:
                     return Color.green;
+
                 case LiquidColor.Yellow:
                     return Color.yellow;
+
                 case LiquidColor.Purple:
                     return new Color(0.5f, 0f, 1f);
+
                 case LiquidColor.Orange:
                     return new Color(1f, 0.5f, 0f);
+
                 default:
                     return Color.clear;
             }
@@ -267,18 +275,12 @@ namespace Station2
         public void SetHoverHighlight(bool isHovering)
         {
             if (isSelectedAsSource)
-                isHovering = false;
-
-            if (hoverHighlightObjects == null)
-                return;
-
-            foreach (GameObject highlightObject in hoverHighlightObjects)
             {
-                if (highlightObject != null)
-                {
-                    highlightObject.SetActive(isHovering);
-                }
+                isHovering = false;
             }
+
+            SetObjectsActive(normalObjects, !isHovering);
+            SetObjectsActive(hoverHighlightObjects, isHovering);
         }
 
         public void SetSelectedHighlight(bool isSelected)
@@ -288,6 +290,24 @@ namespace Station2
             if (isSelected)
             {
                 SetHoverHighlight(false);
+            }
+            else
+            {
+                SetHoverHighlight(false);
+            }
+        }
+
+        private void SetObjectsActive(GameObject[] objects, bool active)
+        {
+            if (objects == null)
+                return;
+
+            foreach (GameObject obj in objects)
+            {
+                if (obj != null)
+                {
+                    obj.SetActive(active);
+                }
             }
         }
 
@@ -336,7 +356,6 @@ namespace Station2
 
             yield return ReturnToOriginalPoseRoutine();
 
-            // Final safety refresh after tube is upright again.
             RefreshVisuals();
         }
 

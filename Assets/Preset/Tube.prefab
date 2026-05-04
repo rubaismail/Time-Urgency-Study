@@ -587,10 +587,7 @@ MonoBehaviour:
   - {fileID: 948880544091781302}
   liquidSectionPrefab: {fileID: 4107223491241682500, guid: 10bf104eee4f14d38997d6e65ce9598a, type: 3}
   startingColors: 01000000020000000300000004000000
-  highlightRenderers: []
-  normalHighlightColor: {r: 1, g: 1, b: 1, a: 1}
-  hoverHighlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  selectedHighlightColor: {r: 0, g: 1, b: 1, a: 1}
+  hoverHighlightObjects: []
   selectedLiftHeight: 0.18
   pourHoverHeight: 0.25
   animationSpeed: 6
