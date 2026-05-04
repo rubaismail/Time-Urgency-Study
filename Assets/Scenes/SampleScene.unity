@@ -8001,6 +8001,54 @@ MonoBehaviour:
     voiceClip: {fileID: 8300000, guid: 420f175e17f824fffb18d0ba4442b71c, type: 3}
     animationTrigger: 0
     hasPlayed: 0
+  - cueName: Keep going!
+    playAtTaskStart: 0
+    remainingTimeThreshold: 240
+    voiceClip: {fileID: 8300000, guid: 420f175e17f824fffb18d0ba4442b71c, type: 3}
+    animationTrigger: 3
+    hasPlayed: 0
+  - cueName: You need to move all the disks to the last peg
+    playAtTaskStart: 0
+    remainingTimeThreshold: 200
+    voiceClip: {fileID: 8300000, guid: 7d1f618e7f0b7482ca2aab73fe838352, type: 3}
+    animationTrigger: 3
+    hasPlayed: 0
+  - cueName: halfway though
+    playAtTaskStart: 0
+    remainingTimeThreshold: 150
+    voiceClip: {fileID: 8300000, guid: 7c221501507ca4e7587216ae588c120c, type: 3}
+    animationTrigger: 0
+    hasPlayed: 0
+  - cueName: Move faster
+    playAtTaskStart: 0
+    remainingTimeThreshold: 100
+    voiceClip: {fileID: 8300000, guid: 5ed3f973e71c64762934d6410fb2ecff, type: 3}
+    animationTrigger: 0
+    hasPlayed: 0
+  - cueName: 1 minute left
+    playAtTaskStart: 0
+    remainingTimeThreshold: 60
+    voiceClip: {fileID: 8300000, guid: 0fbf940553f5044729cd38db2eb41b0b, type: 3}
+    animationTrigger: 1
+    hasPlayed: 0
+  - cueName: Running out of time
+    playAtTaskStart: 0
+    remainingTimeThreshold: 30
+    voiceClip: {fileID: 8300000, guid: 94830a5b52807425083c1ce1ae7dff9e, type: 3}
+    animationTrigger: 1
+    hasPlayed: 0
+  - cueName: Come on! hurry
+    playAtTaskStart: 0
+    remainingTimeThreshold: 15
+    voiceClip: {fileID: 8300000, guid: c98f66c52a28d4f4781526a924e05217, type: 3}
+    animationTrigger: 2
+    hasPlayed: 0
+  - cueName: Out of time
+    playAtTaskStart: 0
+    remainingTimeThreshold: 8
+    voiceClip: {fileID: 8300000, guid: b5a882cdce762456aad220fa25da9b98, type: 3}
+    animationTrigger: 2
+    hasPlayed: 0
 --- !u!1 &982443308 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 572522701158683953, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
