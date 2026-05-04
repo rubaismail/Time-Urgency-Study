@@ -22,10 +22,6 @@ public class TimePressureController : MonoBehaviour
     public GameObject visualTimerRoot;
     public TextMeshPro timerText;
 
-    [Header("NPC Urging")]
-    public GameObject npcTextRoot;
-    public TextMeshPro npcText;
-
     [Header("Audio Source")]
     public AudioSource audioSource;
 
@@ -50,6 +46,9 @@ public class TimePressureController : MonoBehaviour
     public AudioClip threeClip;
     public AudioClip twoClip;
     public AudioClip oneClip;
+
+    [Header("NPC Urging")]
+    public NpcUrgingController npcUrgingController;
 
     private bool playedFiveMinutes = false;
     private bool playedFourMinutes = false;
@@ -82,6 +81,12 @@ public class TimePressureController : MonoBehaviour
         ResetAudioFlags();
 
         ShowStartInstruction(false);
+
+        if (mode == Mode.NpcUrging && npcUrgingController != null)
+        {
+            npcUrgingController.StartUrging(timeLimit);
+        }
+
         UpdatePressure(timeLimit, timeLimit, true, false);
     }
 
@@ -91,7 +96,7 @@ public class TimePressureController : MonoBehaviour
 
         UpdateVisualCountdown(timeRemaining, taskRunning, taskEnded);
         UpdateAudioCountdown(timeRemaining, timeLimit, taskRunning, taskEnded);
-        UpdateNpcUrging(timeRemaining, timeLimit, taskRunning, taskEnded);
+        UpdateNpcUrging(timeRemaining, taskRunning, taskEnded);
     }
 
     public void EndPressure(bool success)
@@ -108,9 +113,9 @@ public class TimePressureController : MonoBehaviour
             timerText.text = "";
         }
 
-        if (npcTextRoot != null)
+        if (npcUrgingController != null)
         {
-            npcTextRoot.SetActive(false);
+            npcUrgingController.StopUrging();
         }
     }
 
@@ -125,14 +130,14 @@ public class TimePressureController : MonoBehaviour
             visualTimerRoot.SetActive(mode == Mode.VisualCountdown);
         }
 
-        if (timerText != null && mode == Mode.VisualCountdown)
+        if (timerText != null)
         {
             timerText.text = "";
         }
 
-        if (npcTextRoot != null)
+        if (npcUrgingController != null)
         {
-            npcTextRoot.SetActive(false);
+            npcUrgingController.ResetToIdle();
         }
     }
 
@@ -316,36 +321,23 @@ public class TimePressureController : MonoBehaviour
         if (clip == null)
             return;
 
-        audioSource.PlayOneShot(clip);
+        if (audioSource != null)
+        {
+            audioSource.PlayOneShot(clip);
+        }
     }
 
-    private void UpdateNpcUrging(float timeRemaining, float timeLimit, bool taskRunning, bool taskEnded)
+    private void UpdateNpcUrging(float timeRemaining, bool taskRunning, bool taskEnded)
     {
-        if (npcTextRoot != null)
-        {
-            npcTextRoot.SetActive(mode == Mode.NpcUrging && taskRunning && !taskEnded);
-        }
-
         if (mode != Mode.NpcUrging)
             return;
 
         if (!taskRunning || taskEnded)
             return;
 
-        if (npcText == null)
-            return;
-
-        if (timeRemaining <= 10f)
+        if (npcUrgingController != null)
         {
-            npcText.text = "Hurry! You are almost out of time!";
-        }
-        else if (timeRemaining <= timeLimit * 0.5f)
-        {
-            npcText.text = "You need to move faster!";
-        }
-        else
-        {
-            npcText.text = "Keep going!";
+            npcUrgingController.UpdateUrging(timeRemaining);
         }
     }
 }

@@ -64,6 +64,8 @@ MonoBehaviour:
     UI and other examples of best-practices for VR development.
   preview: {fileID: -313791287703854912}
   dependencies:
+  - dependency: {fileID: 8300000, guid: 5ed3f973e71c64762934d6410fb2ecff, type: 3}
+    instantiationMode: 1
   - dependency: {fileID: 2100000, guid: 99685157b02e4d446bbecb015645e5e8, type: 2}
     instantiationMode: 0
   - dependency: {fileID: 11400000, guid: 0f906c94e2aa0c3488832acc1db04295, type: 2}
@@ -76,6 +78,8 @@ MonoBehaviour:
     instantiationMode: 0
   - dependency: {fileID: 2100000, guid: 727f87098255ad04987a60f5f08390bc, type: 2}
     instantiationMode: 0
+  - dependency: {fileID: 8300000, guid: 420f175e17f824fffb18d0ba4442b71c, type: 3}
+    instantiationMode: 1
   - dependency: {fileID: 2100000, guid: 1064ff3a1a167442289554f47a6ccc7e, type: 2}
     instantiationMode: 0
   - dependency: {fileID: 2800000, guid: ae2fef5f6398dd24caa6e6bb247b3d5c, type: 3}
@@ -162,6 +166,8 @@ MonoBehaviour:
     instantiationMode: 0
   - dependency: {fileID: 2800000, guid: a85d80c1edb5d2f458d42e79f78055b9, type: 3}
     instantiationMode: 0
+  - dependency: {fileID: 8300000, guid: 60ed87eee1ac04497be6f7c3a5370900, type: 3}
+    instantiationMode: 1
   - dependency: {fileID: 2100000, guid: 9f12d299d16099343a3c5c0d7285822a, type: 2}
     instantiationMode: 0
   - dependency: {fileID: -5475051401550479605, guid: 0011ac3bd216c4242baafcf7d0ee237b, type: 3}
@@ -173,6 +179,8 @@ MonoBehaviour:
   - dependency: {fileID: 8876277155302361286, guid: 4f2cc98efdb484f18938b55870a644c8, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 8300000, guid: fe79b968f9c4e447ba295aeb791fbbf3, type: 3}
+    instantiationMode: 1
+  - dependency: {fileID: 8300000, guid: b5a882cdce762456aad220fa25da9b98, type: 3}
     instantiationMode: 1
   - dependency: {fileID: 2800000, guid: 1e4fbbf0f3e2efa428b2176e5a91baed, type: 3}
     instantiationMode: 0
@@ -208,6 +216,8 @@ MonoBehaviour:
     instantiationMode: 0
   - dependency: {fileID: 2553013088739230253, guid: aa788f58037d03649911102b0771966e, type: 3}
     instantiationMode: 0
+  - dependency: {fileID: 8300000, guid: 94830a5b52807425083c1ce1ae7dff9e, type: 3}
+    instantiationMode: 1
   - dependency: {fileID: 2100000, guid: 70b021a3a7c1b4ccf8dd9b1dc75ae364, type: 2}
     instantiationMode: 0
   - dependency: {fileID: 2800000, guid: 44f5aed242b464720940d489d279bd89, type: 3}
@@ -236,6 +246,8 @@ MonoBehaviour:
     instantiationMode: 0
   - dependency: {fileID: 11400000, guid: 12bd4b8ecc486d84b9e059255860c49b, type: 2}
     instantiationMode: 0
+  - dependency: {fileID: 8300000, guid: 0fbf940553f5044729cd38db2eb41b0b, type: 3}
+    instantiationMode: 1
   - dependency: {fileID: 919132149155446097, guid: 2bb985903131243d787a2f7e4a8f0c89, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 919132149155446097, guid: 5833e680dc0f7ae47aec6b4286570484, type: 3}
@@ -250,10 +262,10 @@ MonoBehaviour:
     instantiationMode: 1
   - dependency: {fileID: 2800000, guid: 40f7736bf48a1d94cac651cb532e4767, type: 3}
     instantiationMode: 0
-  - dependency: {fileID: 919132149155446097, guid: 547dc985c9c9e4ef380914a6c1e08a44, type: 3}
-    instantiationMode: 0
   - dependency: {fileID: 8300000, guid: 393d7c26e633c4cdf97976e6b8708bc9, type: 3}
     instantiationMode: 1
+  - dependency: {fileID: 919132149155446097, guid: 547dc985c9c9e4ef380914a6c1e08a44, type: 3}
+    instantiationMode: 0
   - dependency: {fileID: -5475051401550479605, guid: 8b71ed958f7c7a948b89b79fbc75f945, type: 3}
     instantiationMode: 1
   - dependency: {fileID: -5475051401550479605, guid: a61e32a8ab2b744a3837d668b8fc3155, type: 3}
@@ -386,6 +398,8 @@ MonoBehaviour:
     instantiationMode: 1
   - dependency: {fileID: 2800000, guid: 54baed6400621ff4b8670b6116af054e, type: 3}
     instantiationMode: 0
+  - dependency: {fileID: 8300000, guid: c98f66c52a28d4f4781526a924e05217, type: 3}
+    instantiationMode: 1
   - dependency: {fileID: 3369527167708781622, guid: 88b12c0ca81d9a34eac32a1e1bd19b1c, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 9100000, guid: ac31be18b80054c56bc60efdcb18f527, type: 2}
