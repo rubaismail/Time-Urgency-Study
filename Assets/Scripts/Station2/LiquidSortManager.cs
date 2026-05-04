@@ -32,6 +32,11 @@ namespace Station2
         public TimePressureController timePressureController;
         public StudySessionManager studySessionManager;
 
+        [Header("Error Sound")]
+        public AudioSource errorAudioSource;
+        public AudioClip illegalPourClip;
+        public float errorSoundVolume = 1f;
+
         [Header("Counts")]
         public int pourCount = 0;
         public int illegalPourCount = 0;
@@ -155,6 +160,23 @@ namespace Station2
 
             UpdateStartButtonVisual();
             NotifyStudySessionTaskFinished();
+        }
+
+        public void PlayErrorSound()
+        {
+            if (errorAudioSource == null)
+            {
+                Debug.LogWarning("LiquidSortManager is missing Error Audio Source.");
+                return;
+            }
+
+            if (illegalPourClip == null)
+            {
+                Debug.LogWarning("LiquidSortManager is missing Illegal Pour Clip.");
+                return;
+            }
+
+            errorAudioSource.PlayOneShot(illegalPourClip, errorSoundVolume);
         }
 
         private void NotifyStudySessionTaskFinished()
@@ -290,6 +312,7 @@ namespace Station2
             else
             {
                 illegalPourCount++;
+                PlayErrorSound();
 
                 Debug.Log("Illegal pour: " + sourceTube.name + " → " + destinationTube.name +
                           " | Illegal count: " + illegalPourCount);

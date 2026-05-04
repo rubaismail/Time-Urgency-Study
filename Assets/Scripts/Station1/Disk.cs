@@ -79,6 +79,7 @@ namespace Station1
             if (previousPeg == null)
             {
                 CountIllegalMove();
+                PlayErrorSound();
                 ReturnToPreviousSpot();
                 return;
             }
@@ -86,6 +87,7 @@ namespace Station1
             if (!previousPeg.IsTopDisk(this))
             {
                 CountIllegalMove();
+                PlayErrorSound();
                 ReturnToPreviousSpot();
                 return;
             }
@@ -93,6 +95,7 @@ namespace Station1
             if (hoveredPeg == null)
             {
                 CountInvalidDrop();
+                PlayErrorSound();
                 ReturnToPreviousSpot();
                 return;
             }
@@ -100,6 +103,7 @@ namespace Station1
             if (!hoveredPeg.CanPlaceDisk(this))
             {
                 CountIllegalMove();
+                PlayErrorSound();
                 ReturnToPreviousSpot();
                 return;
             }
@@ -109,6 +113,16 @@ namespace Station1
 
             CountLegalMove();
             RefreshGrabStates();
+        }
+
+        private void PlayErrorSound()
+        {
+            GameManager gameManager = FindFirstObjectByType<GameManager>();
+
+            if (gameManager != null)
+            {
+                gameManager.PlayErrorSound();
+            }
         }
 
         private void ReturnToPreviousSpot()
@@ -164,7 +178,7 @@ namespace Station1
                 manager.RefreshAllGrabStates();
             }
         }
-        
+
         public void SetPhysicsLocked(bool locked)
         {
             if (rb == null)
@@ -194,7 +208,7 @@ namespace Station1
                 Debug.Log("Illegal Moves: " + manager.illegalMoveCount);
             }
         }
-        
+
         private void CountInvalidDrop()
         {
             HanoiManager manager = FindFirstObjectByType<HanoiManager>();

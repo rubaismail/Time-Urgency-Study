@@ -32,6 +32,11 @@ namespace Station1
         public TimePressureController timePressureController;
         public StudySessionManager studySessionManager;
 
+        [Header("Error Sound")]
+        public AudioSource errorAudioSource;
+        public AudioClip illegalMoveClip;
+        public float errorSoundVolume = 1f;
+
         [Header("Latest Result")]
         public TaskResult lastResult;
 
@@ -155,6 +160,23 @@ namespace Station1
             NotifyStudySessionTaskFinished();
 
             Debug.Log("TASK FAILED: TIME RAN OUT");
+        }
+
+        public void PlayErrorSound()
+        {
+            if (errorAudioSource == null)
+            {
+                Debug.LogWarning("Hanoi GameManager is missing Error Audio Source.");
+                return;
+            }
+
+            if (illegalMoveClip == null)
+            {
+                Debug.LogWarning("Hanoi GameManager is missing Illegal Move Clip.");
+                return;
+            }
+
+            errorAudioSource.PlayOneShot(illegalMoveClip, errorSoundVolume);
         }
 
         private void NotifyStudySessionTaskFinished()
