@@ -127,7 +127,7 @@ namespace Station2
             }
 
             UpdateStartButtonVisual();
-            NotifyStudySessionTaskFinished();
+            NotifyStudySessionTaskFinished(true);
         }
 
         public void EndTaskFailure()
@@ -159,7 +159,7 @@ namespace Station2
             }
 
             UpdateStartButtonVisual();
-            NotifyStudySessionTaskFinished();
+            NotifyStudySessionTaskFinished(false);
         }
 
         public void PlayErrorSound()
@@ -179,11 +179,11 @@ namespace Station2
             errorAudioSource.PlayOneShot(illegalPourClip, errorSoundVolume);
         }
 
-        private void NotifyStudySessionTaskFinished()
+        private void NotifyStudySessionTaskFinished(bool success)
         {
             if (studySessionManager != null)
             {
-                studySessionManager.OnTaskFinished("LiquidSort");
+                studySessionManager.OnTaskFinished("LiquidSort", success);
             }
             else
             {

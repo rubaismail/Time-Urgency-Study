@@ -124,7 +124,7 @@ namespace Station1
             }
 
             UpdateStartButtonVisual();
-            NotifyStudySessionTaskFinished();
+            NotifyStudySessionTaskFinished(true);
 
             Debug.Log("TASK SUCCEEDED");
         }
@@ -157,7 +157,7 @@ namespace Station1
             }
 
             UpdateStartButtonVisual();
-            NotifyStudySessionTaskFinished();
+            NotifyStudySessionTaskFinished(false);
 
             Debug.Log("TASK FAILED: TIME RAN OUT");
         }
@@ -179,11 +179,11 @@ namespace Station1
             errorAudioSource.PlayOneShot(illegalMoveClip, errorSoundVolume);
         }
 
-        private void NotifyStudySessionTaskFinished()
+        private void NotifyStudySessionTaskFinished(bool success)
         {
             if (studySessionManager != null)
             {
-                studySessionManager.OnTaskFinished("TowersOfHanoi");
+                studySessionManager.OnTaskFinished("TowersOfHanoi", success);
             }
             else
             {

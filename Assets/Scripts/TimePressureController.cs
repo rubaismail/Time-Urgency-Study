@@ -100,12 +100,12 @@ public class TimePressureController : MonoBehaviour
 
         if (visualTimerRoot != null)
         {
-            visualTimerRoot.SetActive(mode == Mode.VisualCountdown);
+            visualTimerRoot.SetActive(false);
         }
 
-        if (timerText != null && mode == Mode.VisualCountdown)
+        if (timerText != null)
         {
-            timerText.text = success ? "Success!" : "Time Is Up!";
+            timerText.text = "";
         }
 
         if (npcTextRoot != null)

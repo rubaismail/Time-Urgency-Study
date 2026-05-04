@@ -23,6 +23,9 @@ public class StudySessionManager : MonoBehaviour
     public RatingPanelManager ratingPanelManager;
     public bool preTaskRatingCompleted = false;
 
+    [Header("Task Outcome Message")]
+    public TaskOutcomeMessageManager taskOutcomeMessageManager;
+
     [Header("Post-Task Rating Delay")]
     public float postTaskPanelDelay = 2f;
     public bool postTaskRatingPending = false;
@@ -48,6 +51,11 @@ public class StudySessionManager : MonoBehaviour
         preTaskRatingCompleted = false;
         postTaskRatingPending = false;
         movementShouldBeEnabled = false;
+
+        if (taskOutcomeMessageManager != null)
+        {
+            taskOutcomeMessageManager.HideMessage();
+        }
 
         ForceMovementState();
 
@@ -93,6 +101,11 @@ public class StudySessionManager : MonoBehaviour
         if (modalitySelectionUI != null)
         {
             modalitySelectionUI.SetActive(true);
+        }
+
+        if (taskOutcomeMessageManager != null)
+        {
+            taskOutcomeMessageManager.HideMessage();
         }
 
         preTaskRatingCompleted = false;
@@ -168,10 +181,22 @@ public class StudySessionManager : MonoBehaviour
         RefreshTaskStartButtons();
     }
 
-    public void OnTaskFinished(string taskName)
+    public void OnTaskFinished(string taskName, bool success)
     {
         postTaskRatingPending = true;
         RefreshTaskStartButtons();
+
+        if (taskOutcomeMessageManager != null)
+        {
+            if (success)
+            {
+                taskOutcomeMessageManager.ShowSuccessMessage();
+            }
+            else
+            {
+                taskOutcomeMessageManager.ShowFailureMessage();
+            }
+        }
 
         if (postTaskRatingCoroutine != null)
         {
@@ -183,9 +208,14 @@ public class StudySessionManager : MonoBehaviour
 
     private IEnumerator ShowPostTaskRatingAfterDelay(string taskName)
     {
-        Debug.Log("Task finished. Waiting before showing post-task rating panel: " + taskName);
+        Debug.Log("Task finished. Showing outcome message before post-task rating panel: " + taskName);
 
         yield return new WaitForSeconds(postTaskPanelDelay);
+
+        if (taskOutcomeMessageManager != null)
+        {
+            taskOutcomeMessageManager.HideMessage();
+        }
 
         postTaskRatingPending = false;
 
