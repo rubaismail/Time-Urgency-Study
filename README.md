@@ -47,10 +47,6 @@ Recorded measures:
 
 The task manager's default time limit is 120 seconds and can be changed in the Unity Inspector.
 
-### Proposed third task (not implemented)
-
-The original study proposal also included a **Sequence Ordering** task in which numbered objects would be placed into matching labeled slots. This task was not implemented in the final prototype and is not part of the playable scene or collected dataset. The completed study application contains only Tower of Hanoi and Liquid Sort.
-
 ## Session flow
 
 1. Select a time-pressure condition. The manager can also be configured to choose one at random.
